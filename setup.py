@@ -12,7 +12,10 @@ setup(
     url='https://github.com/lbrecic/epygenetics',
     install_requires=[
         # List your package dependencies here
-        "numpy"
+        "numpy",
+        "pandas",
+        "scikit-learn",
+        "pyreadr"
     ],
     classifiers=[
         'Programming Language :: Python :: 3',
