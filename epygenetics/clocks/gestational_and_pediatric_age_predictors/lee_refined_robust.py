@@ -5,5 +5,5 @@ from epygenetics.clocks.regression_clock import RegressionClock
 
 class LeeRefinedRobustClock(RegressionClock):
     def __init__(self):
-        cpgs = pd.read_csv('../../CpGs/LeeRefinedRobust_CpGs.csv')
+        cpgs = pd.read_csv('../../../data/CpGs/LeeRefinedRobust_CpGs.csv')
         super().__init__('LeeRefinedRobust', cpgs, 'CpG', 'coef', 30.74966)

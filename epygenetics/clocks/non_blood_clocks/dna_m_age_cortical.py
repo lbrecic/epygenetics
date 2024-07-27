@@ -7,7 +7,7 @@ from epygenetics.utils.anti_trafo import anti_trafo
 
 class DNAmAgeCorticalClock(RegressionClock):
     def __init__(self):
-        cpgs = pd.read_csv('../../CpGs/DNAmClockCortical_CpGs.csv')
+        cpgs = pd.read_csv('../../../data/CpGs/DNAmClockCortical_CpGs.csv')
         super().__init__('DNAmClockCortical', cpgs, 'CpGs', 'coef', 0.577682570446177)
 
     def calculate(self, common_cpgs, cpg_check, dna_m, pheno, imputation):

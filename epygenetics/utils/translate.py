@@ -8,10 +8,10 @@ imputes_names = ['DNAmClockCortical_imputeRef', 'Mayne_impute']
 example_names = ['exampleBetas', 'examplePheno', 'HorvathOnlineRef']
 parameters_names = ['MiAge_parameters']
 
-cpgs_output_path = '../CpGs/'
-imputes_output_path = '../imputes/'
-examples_output_path = '../examples/'
-params_output_path = '../params/'
+cpgs_output_path = '../../data/CpGs/'
+imputes_output_path = '../../data/imputes/'
+examples_output_path = '../../data/examples/'
+params_output_path = '../../data/params/'
 
 files = [(cpgs_names, cpgs_output_path), (imputes_names, imputes_output_path), (example_names, examples_output_path), (parameters_names, params_output_path)]
 
