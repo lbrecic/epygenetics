@@ -1,4 +1,3 @@
-import pyreadr
 import pandas as pd
 
 from epygenetics.clocks.linear_clock import LinearClock
@@ -6,6 +5,5 @@ from epygenetics.clocks.linear_clock import LinearClock
 
 class BocklandtClock(LinearClock):
     def __init__(self):
-        cpgs_dict = pyreadr.read_r('../../../CpGs_data/Bocklandt_CpG.rda')
-        cpgs = pd.DataFrame(cpgs_dict['Bocklandt_CpG'])
+        cpgs = pd.read_csv('../../CpGs/Bocklandt_CpG.csv')
         super().__init__('Bocklandt', cpgs, 'Bocklandt_CpG')

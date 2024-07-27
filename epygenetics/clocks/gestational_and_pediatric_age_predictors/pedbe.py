@@ -1,7 +1,5 @@
 import numpy as np
-
 import pandas as pd
-import pyreadr
 
 from epygenetics.clocks.regression_clock import RegressionClock
 from epygenetics.utils.anti_trafo import anti_trafo
@@ -9,8 +7,7 @@ from epygenetics.utils.anti_trafo import anti_trafo
 
 class PEDBEClock(RegressionClock):
     def __init__(self):
-        cpgs_dict = pyreadr.read_r('CpGs_data/PEDBE_CpGs.rda')
-        cpgs = pd.DataFrame(cpgs_dict['PEDBE_CpGs'])
+        cpgs = pd.read_csv('../../CpGs/PEDBE_CpGs.csv')
         super().__init__('PEDBE', cpgs, 'ID', 'Coef', -2.10)
 
     def calculate(self, common_cpgs, cpg_check, dna_m, pheno, imputation):

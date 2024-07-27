@@ -1,5 +1,4 @@
 import pandas as pd
-import pyreadr
 
 from epygenetics.clocks.regression_clock import RegressionClock
 from epygenetics.utils.mi_age_mitotic_age import miage_mitotic_age
@@ -7,8 +6,7 @@ from epygenetics.utils.mi_age_mitotic_age import miage_mitotic_age
 
 class MiAgeClock(RegressionClock):
     def __init__(self, *miage_params):
-        cpgs_dict = pyreadr.read_r('CpGs_data/MiAge_CpGs.rda')
-        cpgs = pd.DataFrame(cpgs_dict['MiAge_CpGs'])
+        cpgs = pd.read_csv('../../CpGs/MiAge_CpGs.csv')
         super().__init__('MiAge', cpgs, 'CpGs', 'Age-hyper/Age-hypo', 0)
         self.miage_params = miage_params
 

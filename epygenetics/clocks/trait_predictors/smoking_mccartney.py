@@ -1,11 +1,9 @@
 import pandas as pd
-import pyreadr
 
 from epygenetics.clocks.regression_clock import RegressionClock
 
 
-class AlcoholMcCartneyClock(RegressionClock):
+class SmokingMcCartneyClock(RegressionClock):
     def __init__(self):
-        cpgs_dict = pyreadr.read_r('CpGs_data/Smoking_CpGs.rda')
-        cpgs = pd.DataFrame(cpgs_dict['Smoking_CpGs'])
+        cpgs = pd.read_csv('../../CpGs/Smoking_CpGs.csv')
         super().__init__('Smoking_McCartney', cpgs, 'CpG', 'Beta', 0)

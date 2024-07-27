@@ -1,14 +1,12 @@
 import pandas as pd
 import numpy as np
-import pyreadr
 
 from epygenetics.clocks.clock import Clock
 
 
 class EpiTOC2Clock(Clock):
     def __init__(self, approximated=False, weights='delta', bias='beta0'):
-        cpgs_dict = pyreadr.read_r('../../../CpGs_data/EpiToc2_CpGs.rda')
-        cpgs = pd.DataFrame(cpgs_dict['EpiToc2_CpGs'])
+        cpgs = pd.read_csv('../../CpGs/EpiToc2_CpGs.csv')
         super().__init__('EpiTOC2', cpgs, 'EpiToc2_CpGs')
         self.approximated = approximated
         self.weights = weights
