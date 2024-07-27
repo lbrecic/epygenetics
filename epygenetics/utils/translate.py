@@ -1,7 +1,7 @@
 import pandas as pd
 import pyreadr
 
-name = 'LeeRobust_CpGs'
+name = 'BMI_CpGs'
 cpgs_dict = pyreadr.read_r(f'../../CpGs_data/{name}.rda')
 cpgs = pd.DataFrame(cpgs_dict[name])
 #print(cpgs_dict)
