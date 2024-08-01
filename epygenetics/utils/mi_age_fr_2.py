@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def miage_fr2(x, b, c, d, betaj):
     """
     Objective function used by the MiAge calculation to compute the sum of squared

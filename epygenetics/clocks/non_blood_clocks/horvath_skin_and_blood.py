@@ -1,13 +1,13 @@
-import pandas as pd
 import numpy as np
+import pandas as pd
 
-from ..regression_clock import RegressionClock
+from epygenetics.clocks.base_clocks.regression_clock import RegressionClock
 from epygenetics.utils.anti_trafo import anti_trafo
 
 
 class HorvathSkinAndBloodClock(RegressionClock):
     def __init__(self):
-        cpgs = pd.read_csv('../data/CpGs/Horvath2_CpGs.csv')
+        cpgs = pd.read_csv('data/CpGs/Horvath2_CpGs.csv')
         super().__init__('Horvath2', cpgs, 'ID', 'Coef', -0.447119319)
 
     def calculate(self, common_cpgs, cpg_check, dna_m, pheno, imputation):

@@ -10,17 +10,17 @@ parameters_names = ['MiAge_parameters']
 other_names = ['prcPhenoAge', 'non_prcPhenoAge', 'exampleBetas', 'examplePheno']
 
 
-cpgs_output_path = '../../data/CpGs/'
-imputes_output_path = '../../data/imputes/'
-examples_output_path = '../../data/examples/'
-params_output_path = '../../data/params/'
-other_output_path = '../../data/other/'
+cpgs_output_path = '../data/CpGs/'
+imputes_output_path = '../data/imputes/'
+examples_output_path = '../data/examples/'
+params_output_path = '../data/params/'
+other_output_path = '../data/other/'
 
 files = [(other_names, other_output_path)]
 # (cpgs_names, cpgs_output_path), (imputes_names, imputes_output_path), (example_names, examples_output_path), (parameters_names, params_output_path),
 
 for names, output_path in files:
-    if os.path.exists(output_path) == False:
+    if not os.path.exists(output_path):
         os.mkdir(output_path)
 
     for name in names:
@@ -29,4 +29,3 @@ for names, output_path in files:
         cpgs = pd.DataFrame(cpgs_dict[name])
         cpgs.to_csv(f'{output_path}{name}.csv', index=False)
         print(f'{name} done')
-

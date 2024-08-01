@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 setup(
     name='epygenetics',
@@ -12,11 +12,15 @@ setup(
     url='https://github.com/lbrecic/epygenetics',
     install_requires=[
         # List your package dependencies here
+        "setuptools",
         "numpy",
         "pandas",
-        "scikit-learn",
+        "pandas-stubs",
         "pyreadr",
-        "scipy"
+        "scipy",
+        "mypy",
+        "flake8",
+        "isort",
     ],
     classifiers=[
         'Programming Language :: Python :: 3',
@@ -24,4 +28,10 @@ setup(
         'Operating System :: OS Independent',
     ],
     python_requires='>=3.11',
+    entry_points={
+        'console_scripts': [
+            'epygenetics = epygenetics.main:main',
+            'analysis = epygenetics.analysis:main',
+        ],
+    },
 )

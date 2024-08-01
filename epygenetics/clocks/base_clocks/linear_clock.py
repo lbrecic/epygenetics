@@ -1,5 +1,6 @@
 import numpy as np
-from .clock import Clock
+
+from epygenetics.clocks.base_clocks.clock import Clock
 
 
 class LinearClock(Clock):

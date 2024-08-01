@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
-from .clock import Clock
+
+from epygenetics.clocks.base_clocks.clock import Clock
 
 
 class MeanClock(Clock):

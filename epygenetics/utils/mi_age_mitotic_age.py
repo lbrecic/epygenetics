@@ -1,8 +1,8 @@
 import numpy as np
 from scipy.optimize import minimize
 
-from mi_age_fr_2 import miage_fr2
-from mi_age_grr_2 import miage_grr2
+from epygenetics.utils.mi_age_fr_2 import miage_fr2
+from epygenetics.utils.mi_age_grr_2 import miage_grr2
 
 # def miage_fr2(n, b, c, d, betaj):
 #     """Objective function to be minimized."""

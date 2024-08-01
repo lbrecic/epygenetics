@@ -1,5 +1,9 @@
-setuptools>=68.2.2
-numpy>=1.23.5
-pandas>=2.1.4
-pyreadr>=0.5.0
-scipy>=1.13.1
+setuptools
+numpy
+pandas
+pandas-stubs
+pyreadr
+scipy
+mypy
+flake8
+isort

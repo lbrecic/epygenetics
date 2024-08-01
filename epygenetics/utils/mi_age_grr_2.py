@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def miage_grr2(x, b, c, d, betaj):
     """
     Calculate the derivative of the objective function used by the MiAge calculation with respect to n_j.
