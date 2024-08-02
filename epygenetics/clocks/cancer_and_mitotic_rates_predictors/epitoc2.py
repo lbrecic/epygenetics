@@ -7,7 +7,7 @@ from epygenetics.clocks.base_clocks.clock import Clock
 class EpiTOC2Clock(Clock):
     def __init__(self, approximated=False, weights='delta', bias='beta0'):
         cpgs = pd.read_csv('data/CpGs/EpiToc2_CpGs.csv')
-        super().__init__('EpiTOC2', cpgs, 'EpiToc2_CpGs')
+        super().__init__('EpiTOC2','EpiToc2_CpGs', cpgs)
         self.approximated = approximated
         self.weights = weights
         self.bias = bias

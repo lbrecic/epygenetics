@@ -8,7 +8,7 @@ from epygenetics.utils.anti_trafo import anti_trafo
 class PEDBEClock(RegressionClock):
     def __init__(self):
         cpgs = pd.read_csv('data/CpGs/PEDBE_CpGs.csv')
-        super().__init__('PEDBE', cpgs, 'ID', 'Coef', -2.10)
+        super().__init__('PEDBE', 'ID', 'Coef', -2.10, cpgs)
 
     def calculate(self, common_cpgs, cpg_check, dna_m, pheno, imputation):
         if cpg_check or imputation:

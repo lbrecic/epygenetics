@@ -5,8 +5,8 @@ from epygenetics.clocks.base_clocks.clock import Clock
 
 
 class RegressionClock(Clock):
-    def __init__(self, name, cpgs, marker_name, coef_name, reg_coef):
-        super().__init__(name, cpgs, marker_name)
+    def __init__(self, name, marker_name, coef_name, reg_coef, cpgs=None):
+        super().__init__(name, marker_name, cpgs)
         self.coef_name = coef_name
         self.reg_coef = reg_coef
 

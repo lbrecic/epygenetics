@@ -8,7 +8,7 @@ from epygenetics.utils.anti_trafo import anti_trafo
 class HorvathMultitissueClock(RegressionClock):
     def __init__(self):
         cpgs = pd.read_csv('data/CpGs/Horvath1_CpGs.csv')
-        super().__init__('Horvath1', cpgs, 'CpGmarker', 'CoefficientTraining', 0.696)
+        super().__init__('Horvath1', 'CpGmarker', 'CoefficientTraining', 0.696, cpgs)
 
     def calculate(self, common_cpgs, cpg_check, dna_m, pheno, imputation):
         if cpg_check or imputation:

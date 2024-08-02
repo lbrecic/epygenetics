@@ -7,7 +7,7 @@ from epygenetics.utils.mi_age_mitotic_age import miage_mitotic_age
 class MiAgeClock(RegressionClock):
     def __init__(self, *miage_params):
         cpgs = pd.read_csv('data/CpGs/MiAge_CpGs.csv')
-        super().__init__('MiAge', cpgs, 'CpGs', 'Age-hyper/Age-hypo', 0)
+        super().__init__('MiAge', 'CpGs', 'Age-hyper/Age-hypo', 0, cpgs)
         self.miage_params = miage_params
 
     def calculate(self, common_cpgs, cpg_check, dna_m, pheno, imputation):
