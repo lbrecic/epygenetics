@@ -1,19 +1,12 @@
 import numpy as np
 from scipy.optimize import minimize
+from typing import Tuple
 
 from epygenetics.utils.mi_age_fr_2 import miage_fr2
 from epygenetics.utils.mi_age_grr_2 import miage_grr2
 
-# def miage_fr2(n, b, c, d, betaj):
-#     """Objective function to be minimized."""
-#     return np.sum((c + b**(n-1)*d - betaj)**2)
-#
-# def miage_grr2(n, b, c, d, betaj):
-#     """Gradient of the objective function."""
-#     return 2 * np.sum((c + b**(n-1)*d - betaj) * b**(n-1) * np.log(b) * d)
 
-
-def miage_mitotic_age(beta, b, c, d):
+def miage_mitotic_age(beta: np.ndarray, b: float, c: float, d: float) -> np.ndarray:
     """
     Estimate the MiAge using optimization to minimize the MiAge_fr2 for each patient.
 

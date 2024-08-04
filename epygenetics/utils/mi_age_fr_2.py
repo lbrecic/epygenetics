@@ -1,7 +1,8 @@
 import numpy as np
+from typing import Union
 
 
-def miage_fr2(x, b, c, d, betaj):
+def miage_fr2(x: Union[np.ndarray, float], b: float, c: float, d: float, betaj: np.ndarray) -> float:
     """
     Objective function used by the MiAge calculation to compute the sum of squared
     differences between observed methylation levels and a model prediction across CpG sites for a given patient.
@@ -23,7 +24,8 @@ def miage_fr2(x, b, c, d, betaj):
         Sum of squared differences for patient j.
     """
     nj = x
-    return np.sum((c + b**(nj - 1) * d - betaj) ** 2, axis=None)  # Ensure na.rm equivalent by handling NaNs appropriately if needed.
+    return np.sum((c + b ** (nj - 1) * d - betaj) ** 2,
+                  axis=None)  # Ensure na.rm equivalent by handling NaNs appropriately if needed.
 
 # Example usage:
 # Assuming x, b, c, d, and betaj are defined appropriately with numpy arrays or values:

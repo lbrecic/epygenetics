@@ -1,7 +1,8 @@
 import numpy as np
+from typing import Union
 
 
-def miage_grr2(x, b, c, d, betaj):
+def miage_grr2(x: Union[np.ndarray, float], b: float, c: float, d: float, betaj: np.ndarray) -> float:
     """
     Calculate the derivative of the objective function used by the MiAge calculation with respect to n_j.
     This derivative helps in optimization algorithms where gradients are required.

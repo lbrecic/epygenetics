@@ -1,7 +1,9 @@
+from typing import Union
+
 import numpy as np
 
 
-def anti_trafo(x, adult_age=20):
+def anti_trafo(x: Union[np.ndarray, float], adult_age: int = 20) -> Union[np.ndarray, float]:
     """
     Reverse the transformation applied to ages, restoring them to their original scale.
 

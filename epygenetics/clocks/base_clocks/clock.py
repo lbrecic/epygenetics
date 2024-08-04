@@ -1,26 +1,28 @@
 from abc import ABC, abstractmethod
+from typing import Any, Optional, Tuple
 
+import numpy as np
 import pandas as pd
 
 
 class Clock(ABC):
-    def __init__(self, name, marker_name, cpgs=None):
-        self.name = name
-        self.marker_name = marker_name
-        self.cpgs = cpgs
+    def __init__(self, name: str, marker_name: str, cpgs: Optional[pd.DataFrame] = None):
+        self.name: str = name
+        self.marker_name: str = marker_name
+        self.cpgs: Optional[pd.DataFrame] = cpgs
 
-    def load_cpgs_from_csv(self, path):
+    def load_cpgs_from_csv(self, path: str) -> None:
         self.cpgs = pd.read_csv(path)
 
     @abstractmethod
-    def check_cpgs(self, dna_m, cpg_imputation, imputation):
+    def check_cpgs(self, dna_m: pd.DataFrame, cpg_imputation: Optional[pd.DataFrame], imputation: bool) -> Tuple[np.ndarray, Any]:
         pass
 
     @abstractmethod
-    def calculate(self, common_cpgs, cpg_check, dna_m, pheno, imputation):
+    def calculate(self, common_cpgs: np.ndarray, cpg_check: Any, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], imputation: bool) -> Any:
         pass
 
-    def execute(self, dna_m, pheno=None, cpg_imputation=None, imputation=False):
+    def execute(self, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame] = None, cpg_imputation: Optional[pd.DataFrame] = None, imputation: bool = False) -> None:
         cpgs, cpg_check = self.check_cpgs(dna_m, cpg_imputation, imputation)
         result = self.calculate(cpgs, cpg_check, dna_m, pheno, imputation)
         print(result)

@@ -1,4 +1,8 @@
-def mean_impute(df):
+import pandas as pd
+from typing import Any
+
+
+def mean_impute(df: pd.DataFrame) -> pd.DataFrame:
     """
     Perform mean imputation for singly missing CpGs in a dataframe of CpG Betas.
 

@@ -1,13 +1,14 @@
 import numpy as np
 import pandas as pd
+from typing import Optional, Tuple, Union
 
 from epygenetics.clocks.base_clocks.clock import Clock
 
 
 class MeanClock(Clock):
-    def check_cpgs(self, dna_m, cpg_imputation, imputation):
-        present_cpgs = np.intersect1d(self.cpgs, dna_m.columns)
-        cpg_check = len(self.cpgs) == len(present_cpgs)
+    def check_cpgs(self, dna_m: pd.DataFrame, cpg_imputation: Optional[pd.DataFrame], imputation: bool) -> Tuple[np.ndarray, bool]:
+        present_cpgs: np.ndarray = np.intersect1d(self.cpgs[self.marker_name], dna_m.columns)
+        cpg_check: bool = len(self.cpgs[self.marker_name]) == len(present_cpgs)
 
         if not cpg_check and imputation:
             if cpg_imputation is None:
@@ -17,15 +18,15 @@ class MeanClock(Clock):
             print(f"Imputation of missing CpG Values occurred for {self.name}")
             for cpg in self.cpgs:
                 if cpg not in dna_m.columns:
-                    mean_val = cpg_imputation.get(cpg)
+                    mean_val: Optional[float] = cpg_imputation.get(cpg)
                     if mean_val is None:
                         raise ValueError(f"No imputation value provided for missing CpG: {cpg}")
                     dna_m[cpg] = mean_val
-            present_cpgs = self.cpgs
+            present_cpgs = self.cpgs[self.marker_name].values
 
         return present_cpgs, cpg_check
 
-    def calculate(self, common_cpgs, cpg_check, dna_m, pheno, imputation):
+    def calculate(self, common_cpgs: np.ndarray, cpg_check: bool, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], imputation: bool) -> Union[pd.DataFrame, pd.Series]:
         if cpg_check or imputation:
             map_idx = dna_m.columns.get_indexer(common_cpgs)
             mean_v = dna_m.iloc[:, map_idx].mean(axis=1, skipna=True)

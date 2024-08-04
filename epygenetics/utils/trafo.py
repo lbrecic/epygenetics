@@ -1,7 +1,8 @@
 import numpy as np
+from typing import Union
 
 
-def trafo(x, adult_age=20):
+def trafo(x: Union[np.ndarray, float], adult_age: int = 20) -> Union[np.ndarray, float]:
     """
     Transform a vector of sample ages based on a logarithmic or linear scaling.
 

@@ -1,9 +1,10 @@
 import pandas as pd
+from typing import Optional
 
 from epygenetics.clocks.base_clocks.regression_clock import RegressionClock
 
 
 class ZhangClock(RegressionClock):
-    def __init__(self):
-        cpgs = pd.read_csv('data/CpGs/Zhang_10_CpG.csv')
+    def __init__(self) -> None:
+        cpgs: Optional[pd.DataFrame] = pd.read_csv('data/CpGs/Zhang_10_CpG.csv')
         super().__init__('Zhang', 'Marker', 'coef', 0, cpgs)
