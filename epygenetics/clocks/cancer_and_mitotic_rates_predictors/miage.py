@@ -1,6 +1,7 @@
-import pandas as pd
+from typing import Any, Optional, Tuple, Union
+
 import numpy as np
-from typing import Optional, Tuple, Any, Union
+import pandas as pd
 
 from epygenetics.clocks.base_clocks.regression_clock import RegressionClock
 from epygenetics.utils.mi_age_mitotic_age import miage_mitotic_age

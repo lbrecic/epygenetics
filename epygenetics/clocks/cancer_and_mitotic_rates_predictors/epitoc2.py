@@ -1,6 +1,7 @@
+from typing import Optional, Tuple, Union
+
 import numpy as np
 import pandas as pd
-from typing import Optional, Tuple, Union
 
 from epygenetics.clocks.base_clocks.clock import Clock
 

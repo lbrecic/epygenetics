@@ -1,20 +1,30 @@
 import pandas as pd
 
 from epygenetics.clocks.base_clocks.regression_clock import RegressionClock
+from epygenetics.clocks.biological_age_and_mortality_predictors.hrs_in_ch_pheno_age import \
+    HRSInCHPhenoAgeClock
+from epygenetics.clocks.biological_age_and_mortality_predictors.non_prc_pheno_age import \
+    NonPRCPhenoAgeClock
 from epygenetics.clocks.biological_age_and_mortality_predictors.pheno_age import \
     PhenoAgeClock
 from epygenetics.clocks.biological_age_and_mortality_predictors.prc_pheno_age import \
     PRCPhenoAgeClock
+from epygenetics.clocks.cancer_and_mitotic_rates_predictors.epitoc import \
+    EpiTOCClock
+from epygenetics.clocks.cancer_and_mitotic_rates_predictors.epitoc2 import \
+    EpiTOC2Clock
+from epygenetics.clocks.cancer_and_mitotic_rates_predictors.hypo_clock import \
+    HypoClock
+from epygenetics.clocks.cancer_and_mitotic_rates_predictors.miage import \
+    MiAgeClock
 from epygenetics.clocks.chronological_age_predictors import \
     HorvathMultitissueClock
 from epygenetics.clocks.chronological_age_predictors.bocklandt import \
     BocklandtClock
 from epygenetics.clocks.chronological_age_predictors.garagnani import \
     GaragnaniClock
-from epygenetics.clocks.chronological_age_predictors.hannum import \
-    HannumClock
-from epygenetics.clocks.chronological_age_predictors.zhang import \
-    ZhangClock
+from epygenetics.clocks.chronological_age_predictors.hannum import HannumClock
+from epygenetics.clocks.chronological_age_predictors.zhang import ZhangClock
 from epygenetics.clocks.gestational_and_pediatric_age_predictors.bohlin import \
     BohlinClock
 from epygenetics.clocks.gestational_and_pediatric_age_predictors.knight import \
@@ -23,32 +33,17 @@ from epygenetics.clocks.gestational_and_pediatric_age_predictors.lee_control imp
     LeeControlClock
 from epygenetics.clocks.gestational_and_pediatric_age_predictors.mayne import \
     MayneClock
-from epygenetics.clocks.cancer_and_mitotic_rates_predictors.epitoc import \
-    EpiTOCClock
-from epygenetics.clocks.cancer_and_mitotic_rates_predictors.hypo_clock import \
-    HypoClock
-from epygenetics.clocks.cancer_and_mitotic_rates_predictors.miage import \
-    MiAgeClock
-from epygenetics.clocks.cancer_and_mitotic_rates_predictors.epitoc2 import \
-    EpiTOC2Clock
-from epygenetics.clocks.trait_predictors.alcohol_mccartney import \
-    AlcoholMcCartneyClock
-from epygenetics.clocks.trait_predictors.bmi_mccartney import \
-    BMIMcCartneyClock
-from epygenetics.clocks.trait_predictors.smoking_mccartney import \
-    SmokingMcCartneyClock
-from epygenetics.clocks.non_blood_clocks.horvath_skin_and_blood import \
-    HorvathSkinAndBloodClock
-from epygenetics.clocks.non_blood_clocks.dna_m_age_cortical import \
-    DNAmAgeCorticalClock
-from epygenetics.clocks.biological_age_and_mortality_predictors.pheno_age import \
-    PhenoAgeClock
-from epygenetics.clocks.biological_age_and_mortality_predictors.non_prc_pheno_age import \
-    NonPRCPhenoAgeClock
-from epygenetics.clocks.biological_age_and_mortality_predictors.hrs_in_ch_pheno_age import \
-    HRSInCHPhenoAgeClock
 from epygenetics.clocks.gestational_and_pediatric_age_predictors.pedbe import \
     PEDBEClock
+from epygenetics.clocks.non_blood_clocks.dna_m_age_cortical import \
+    DNAmAgeCorticalClock
+from epygenetics.clocks.non_blood_clocks.horvath_skin_and_blood import \
+    HorvathSkinAndBloodClock
+from epygenetics.clocks.trait_predictors.alcohol_mccartney import \
+    AlcoholMcCartneyClock
+from epygenetics.clocks.trait_predictors.bmi_mccartney import BMIMcCartneyClock
+from epygenetics.clocks.trait_predictors.smoking_mccartney import \
+    SmokingMcCartneyClock
 
 
 class TestClock(RegressionClock):

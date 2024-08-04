@@ -3,7 +3,7 @@ import os.path
 import pandas as pd
 import pyreadr
 
-cpgs_names = ['Alcohol_CpGs', 'BMI_CpGs', 'Bocklandt_CpG', 'Bohlin_CpGs', 'DNAmClockCortical_CpGs', 'DNAmTL_CpGs','EpiToc2_CpGs', 'EpiToc_CpGs', 'Garagnani_CpG', 'Hannum_CpGs','Horvath1_CpGs', 'Horvath2_CpGs', 'HorvathOnlineRef','HRSInCHPhenoAge_CpGs', 'hypoClock_CpGs', 'Knight_CpGs','LeeControl_CpGs', 'LeeRefinedRobust_CpGs', 'LeeRobust_CpGs','Lin_CpGs', 'Mayne_CpGs', 'MiAge_CpGs', 'PEDBE_CpGs','PhenoAge_CpGs', 'Smoking_CpGs', 'VidalBralo_CpGs','Weidner_CpGs', 'Zhang2019_CpGs', 'Zhang_10_CpG']
+cpgs_names = ['Alcohol_CpGs', 'BMI_CpGs', 'Bocklandt_CpG', 'Bohlin_CpGs', 'DNAmClockCortical_CpGs', 'DNAmTL_CpGs', 'EpiToc2_CpGs', 'EpiToc_CpGs', 'Garagnani_CpG', 'Hannum_CpGs', 'Horvath1_CpGs', 'Horvath2_CpGs', 'HorvathOnlineRef', 'HRSInCHPhenoAge_CpGs', 'hypoClock_CpGs', 'Knight_CpGs', 'LeeControl_CpGs', 'LeeRefinedRobust_CpGs', 'LeeRobust_CpGs', 'Lin_CpGs', 'Mayne_CpGs', 'MiAge_CpGs', 'PEDBE_CpGs', 'PhenoAge_CpGs', 'Smoking_CpGs', 'VidalBralo_CpGs', 'Weidner_CpGs', 'Zhang2019_CpGs', 'Zhang_10_CpG']
 imputes_names = ['DNAmClockCortical_imputeRef', 'Mayne_impute']
 example_names = ['exampleBetas', 'examplePheno', 'HorvathOnlineRef']
 parameters_names = ['MiAge_parameters']

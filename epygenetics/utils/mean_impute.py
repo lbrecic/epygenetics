@@ -1,5 +1,4 @@
 import pandas as pd
-from typing import Any
 
 
 def mean_impute(df: pd.DataFrame) -> pd.DataFrame:

@@ -1,5 +1,6 @@
-import numpy as np
 from typing import Union
+
+import numpy as np
 
 
 def miage_grr2(x: Union[np.ndarray, float], b: float, c: float, d: float, betaj: np.ndarray) -> float:

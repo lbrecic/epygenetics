@@ -1,5 +1,6 @@
-import pandas as pd
 from typing import List
+
+import pandas as pd
 
 
 def subset_cg(dat: pd.DataFrame, cg_set: List[str]) -> pd.DataFrame:

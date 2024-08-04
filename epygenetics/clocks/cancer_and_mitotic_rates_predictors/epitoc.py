@@ -1,5 +1,6 @@
-import pandas as pd
 from typing import Optional
+
+import pandas as pd
 
 from epygenetics.clocks.base_clocks.mean_clock import MeanClock
 

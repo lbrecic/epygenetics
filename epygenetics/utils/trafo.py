@@ -1,5 +1,6 @@
-import numpy as np
 from typing import Union
+
+import numpy as np
 
 
 def trafo(x: Union[np.ndarray, float], adult_age: int = 20) -> Union[np.ndarray, float]:

@@ -1,6 +1,7 @@
+from typing import Optional, Union
+
 import numpy as np
 import pandas as pd
-from typing import Optional, Union
 
 from epygenetics.clocks.base_clocks.regression_clock import RegressionClock
 from epygenetics.utils.anti_trafo import anti_trafo

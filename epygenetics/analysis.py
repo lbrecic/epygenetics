@@ -1,5 +1,5 @@
-import subprocess
 import argparse
+import subprocess
 
 
 def run_command(command: str) -> None:

@@ -1,6 +1,5 @@
 import numpy as np
 from scipy.optimize import minimize
-from typing import Tuple
 
 from epygenetics.utils.mi_age_fr_2 import miage_fr2
 from epygenetics.utils.mi_age_grr_2 import miage_grr2
