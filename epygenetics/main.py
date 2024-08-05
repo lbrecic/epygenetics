@@ -1,160 +1,52 @@
+import argparse
+import sys
+
 import pandas as pd
-
-from epygenetics.clocks.base_clocks.regression_clock import RegressionClock
-from epygenetics.clocks.biological_age_and_mortality_predictors.hrs_in_ch_pheno_age import \
-    HRSInCHPhenoAgeClock
-from epygenetics.clocks.biological_age_and_mortality_predictors.non_prc_pheno_age import \
-    NonPRCPhenoAgeClock
-from epygenetics.clocks.biological_age_and_mortality_predictors.pheno_age import \
-    PhenoAgeClock
-from epygenetics.clocks.biological_age_and_mortality_predictors.prc_pheno_age import \
-    PRCPhenoAgeClock
-from epygenetics.clocks.cancer_and_mitotic_rates_predictors.epitoc import \
-    EpiTOCClock
-from epygenetics.clocks.cancer_and_mitotic_rates_predictors.epitoc2 import \
-    EpiTOC2Clock
-from epygenetics.clocks.cancer_and_mitotic_rates_predictors.hypo_clock import \
-    HypoClock
-from epygenetics.clocks.cancer_and_mitotic_rates_predictors.miage import \
-    MiAgeClock
-from epygenetics.clocks.chronological_age_predictors import \
-    HorvathMultitissueClock
-from epygenetics.clocks.chronological_age_predictors.bocklandt import \
-    BocklandtClock
-from epygenetics.clocks.chronological_age_predictors.garagnani import \
-    GaragnaniClock
-from epygenetics.clocks.chronological_age_predictors.hannum import HannumClock
-from epygenetics.clocks.chronological_age_predictors.zhang import ZhangClock
-from epygenetics.clocks.gestational_and_pediatric_age_predictors.bohlin import \
-    BohlinClock
-from epygenetics.clocks.gestational_and_pediatric_age_predictors.knight import \
-    KnightClock
-from epygenetics.clocks.gestational_and_pediatric_age_predictors.lee_control import \
-    LeeControlClock
-from epygenetics.clocks.gestational_and_pediatric_age_predictors.mayne import \
-    MayneClock
-from epygenetics.clocks.gestational_and_pediatric_age_predictors.pedbe import \
-    PEDBEClock
-from epygenetics.clocks.non_blood_clocks.dna_m_age_cortical import \
-    DNAmAgeCorticalClock
-from epygenetics.clocks.non_blood_clocks.horvath_skin_and_blood import \
-    HorvathSkinAndBloodClock
-from epygenetics.clocks.trait_predictors.alcohol_mccartney import \
-    AlcoholMcCartneyClock
-from epygenetics.clocks.trait_predictors.bmi_mccartney import BMIMcCartneyClock
-from epygenetics.clocks.trait_predictors.smoking_mccartney import \
-    SmokingMcCartneyClock
-
-
-class TestClock(RegressionClock):
-    def __init__(self):
-        cpgs = pd.read_csv('data/CpGs/PhenoAge_CpGs.csv')
-        super().__init__('Test', 'CpG', 'Weight', 0, cpgs)
+import traceback
+from epygenetics.clocks.type import *
+from epygenetics.clocks.factory import ClockFactory
 
 
 def main():
-    betas = pd.read_csv('data/examples/exampleBetas.csv')
-    pheno = pd.read_csv('data/examples/examplePheno.csv')
+    parser = argparse.ArgumentParser(description="Clock Execution Script")
+    parser.add_argument('--clock', type=str, required=True, help="Name of the clock to execute")
+    parser.add_argument('--dnam', type=str, required=True, help="Path to DNA methylation betas file")
+    parser.add_argument('--pheno', type=str, required=False, help="Path to pheno file")
+    parser.add_argument('--imputation', type=str, required=False, help="Path to CpG imputation file")
+    parser.add_argument('--verbose', action='store_true', help="Show traceback if an error occurs")
 
-    # print("Horvath Clock:")
-    # HorvathMultitissueClock().execute(betas)
-    # print("###################################################")
+    args = parser.parse_args()
 
-    # TestClock().execute(betas, pheno)
-    # print("###################################################")
+    try:
+        # Set traceback verbosity
+        if not args.verbose:
+            sys.tracebacklimit = 0
 
-    # print("Garagnani Clock:")
-    # GaragnaniClock().execute(betas)
-    # print("###################################################")
-    #
-    # print("Hannum Clock:")
-    # HannumClock().execute(betas)
-    # print("###################################################")
-    #
-    # print("Zhang Clock:")
-    # ZhangClock().execute(betas)
-    # print("###################################################")
+        # Load DNA methylation betas
+        dna_m = pd.read_csv(args.dnam)
 
-    # print("Bohlin Clock:")
-    # BohlinClock().execute(betas)
-    # print("###################################################")
+        # Load pheno data if provided
+        pheno = pd.read_csv(args.pheno) if args.pheno else None
 
-    # print("Knight Clock:")
-    # KnightClock().execute(betas)
-    # print("###################################################")
+        # Load CpG imputation data if provided
+        cpg_imputation = pd.read_csv(args.imputation) if args.imputation else None
+        is_imputation = True if args.imputation else False
 
-    # print("Lee Control Clock:")
-    # LeeControlClock().execute(betas)
-    # print("###################################################")
+        # Create clock
+        clock_type = ClockType[args.clock]
+        clock = ClockFactory().create_clock(clock_type)
 
-    imputation = pd.read_csv('data/imputes/Mayne_impute.csv')
-    print("Mayne Clock:")
-    MayneClock().execute(betas, None, imputation, True)
-    # MayneClock().execute(betas, None, None, True)
-    print("###################################################")
+        # Execute clock
+        clock.execute(dna_m, pheno, cpg_imputation, is_imputation)
 
-    # print("Alcohol McCartney Clock:")
-    # AlcoholMcCartneyClock().execute(betas)
-    # print("###################################################")
-
-    # print("BMI McCartney Clock:")
-    # BMIMcCartneyClock().execute(betas)
-    # print("###################################################")
-
-    # print("Smoking McCartney Clock:")
-    # SmokingMcCartneyClock().execute(betas)
-    # print("###################################################")
-
-    # print("Horvath Skin and Blood Clock:")
-    # HorvathSkinAndBloodClock().execute(betas)
-    # print("###################################################")
-
-    # imputation = pd.read_csv('data/imputes/DNAmClockCortical_imputeRef.csv')
-    # print("DNAm Age Cortical Clock:")
-    # DNAmAgeCorticalClock().execute(betas, None, imputation, True)
-    # print("###################################################")
-
-    # print("Bocklandt Clock:")
-    # BocklandtClock().execute(betas)
-    # print("###################################################")
-    #
-    # print("EpiTOC Clock:")
-    # EpiTOCClock().execute(betas)
-    # print("###################################################")
-    #
-    # print("Hypo Clock:")
-    # HypoClock().execute(betas)
-    # print("###################################################")
-    #
-    # imputation = pd.read_csv('data/imputes/Mayne_impute.csv')
-    # print("MiAge Clock:")
-    # MiAgeClock(1.4, 2.2, 0.2).execute(betas, None, imputation, True)
-    # print("###################################################")
-
-    # print("EpiTOC2 Clock:")
-    # EpiTOC2Clock().execute(betas)
-    # print("###################################################")
-
-    # print("PhenoAge Clock:")
-    # PhenoAgeClock().execute(betas)
-    # print("###################################################")
-    #
-    # print("PRCPhenoAge Clock:")
-    # PRCPhenoAgeClock().execute(betas)
-    # print("###################################################")
-    #
-    # print("Non PRCPhenoAge Clock:")
-    # NonPRCPhenoAgeClock().execute(betas)
-    # print("###################################################")
-
-    # print("HRS In CH Pheno Age Clock:")
-    # HRSInCHPhenoAgeClock().execute(betas)
-    # print("###################################################")
-
-    # print("PEDBE Clock:")
-    # PEDBEClock().execute(betas)
-    # print("###################################################")
+    except Exception as e:
+        if args.verbose:
+            traceback.print_exc()
+        else:
+            print(f"An error occurred: {e}")
+            print('Please try choosing a clock from the following list:')
+            list_predefined_clocks()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

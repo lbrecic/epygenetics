@@ -4,13 +4,14 @@ import numpy as np
 import pandas as pd
 
 from epygenetics.clocks.base_clocks.regression_clock import RegressionClock
+from epygenetics.clocks.type import ClockType
 from epygenetics.utils.anti_trafo import anti_trafo
 
 
 class HorvathMultitissueClock(RegressionClock):
     def __init__(self):
         cpgs: pd.DataFrame = pd.read_csv('data/CpGs/Horvath1_CpGs.csv')
-        super().__init__('Horvath1', 'CpGmarker', 'CoefficientTraining', 0.696, cpgs)
+        super().__init__(ClockType.HORVATH_MULTITISSUE, 'CpGmarker', 'CoefficientTraining', 0.696, cpgs)
 
     def calculate(self, common_cpgs: np.ndarray, cpg_check: bool, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], imputation: bool) -> Union[pd.DataFrame, pd.Series]:
         if cpg_check or imputation:

@@ -4,13 +4,14 @@ import numpy as np
 import pandas as pd
 
 from epygenetics.clocks.base_clocks.regression_clock import RegressionClock
+from epygenetics.clocks.type import ClockType
 from epygenetics.utils.anti_trafo import anti_trafo
 
 
 class DNAmAgeCorticalClock(RegressionClock):
     def __init__(self) -> None:
         cpgs: Optional[pd.DataFrame] = pd.read_csv('data/CpGs/DNAmClockCortical_CpGs.csv')
-        super().__init__('DNAmClockCortical', 'CpGs', 'coef', 0.577682570446177, cpgs)
+        super().__init__(ClockType.DNAM_AGE_CORTICAL, 'CpGs', 'coef', 0.577682570446177, cpgs)
 
     def calculate(self, common_cpgs: np.ndarray, cpg_check: bool, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], imputation: bool) -> Union[pd.DataFrame, pd.Series]:
         if cpg_check or imputation:

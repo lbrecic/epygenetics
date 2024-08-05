@@ -4,12 +4,13 @@ import numpy as np
 import pandas as pd
 
 from epygenetics.clocks.base_clocks.clock import Clock
+from epygenetics.clocks.type import ClockType
 
 
 class EpiTOC2Clock(Clock):
     def __init__(self, approximated: bool = False, weights: str = 'delta', bias: str = 'beta0') -> None:
         cpgs: Optional[pd.DataFrame] = pd.read_csv('data/CpGs/EpiToc2_CpGs.csv')
-        super().__init__('EpiTOC2', 'EpiToc2_CpGs', cpgs)
+        super().__init__(ClockType.EPITOC2, 'EpiToc2_CpGs', cpgs)
         self.approximated: bool = approximated
         self.weights: str = weights
         self.bias: str = bias

@@ -4,13 +4,14 @@ import numpy as np
 import pandas as pd
 
 from epygenetics.clocks.base_clocks.regression_clock import RegressionClock
+from epygenetics.clocks.type import ClockType
 from epygenetics.utils.anti_trafo import anti_trafo
 
 
 class PEDBEClock(RegressionClock):
     def __init__(self) -> None:
         cpgs: Optional[pd.DataFrame] = pd.read_csv('data/CpGs/PEDBE_CpGs.csv')
-        super().__init__('PEDBE', 'ID', 'Coef', -2.10, cpgs)
+        super().__init__(ClockType.PEDBE, 'ID', 'Coef', -2.10, cpgs)
 
     def calculate(self, common_cpgs: np.ndarray, cpg_check: bool, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], imputation: bool) -> Union[pd.DataFrame, pd.Series]:
         if cpg_check or imputation:

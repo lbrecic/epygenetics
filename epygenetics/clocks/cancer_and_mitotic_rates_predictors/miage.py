@@ -4,13 +4,14 @@ import numpy as np
 import pandas as pd
 
 from epygenetics.clocks.base_clocks.regression_clock import RegressionClock
+from epygenetics.clocks.type import ClockType
 from epygenetics.utils.mi_age_mitotic_age import miage_mitotic_age
 
 
 class MiAgeClock(RegressionClock):
     def __init__(self, *miage_params: Any) -> None:
         cpgs: Optional[pd.DataFrame] = pd.read_csv('data/CpGs/MiAge_CpGs.csv')
-        super().__init__('MiAge', 'CpGs', 'Age-hyper/Age-hypo', 0, cpgs)
+        super().__init__(ClockType.MIAGE, 'CpGs', 'Age-hyper/Age-hypo', 0, cpgs)
         self.miage_params: Tuple[Any, ...] = miage_params
 
     def calculate(self, common_cpgs: np.ndarray, cpg_check: bool, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], imputation: bool) -> Union[pd.DataFrame, pd.Series]:
