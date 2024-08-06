@@ -3,7 +3,7 @@ import sys
 
 import pandas as pd
 import traceback
-from epygenetics.clocks.type import *
+from epygenetics.clocks.type import ClockType
 from epygenetics.clocks.factory import ClockFactory
 
 
@@ -33,7 +33,7 @@ def main():
         is_imputation = True if args.imputation else False
 
         # Create clock
-        clock_type = ClockType[args.clock]
+        clock_type = ClockType.from_str(args.clock)
         clock = ClockFactory().create_clock(clock_type)
 
         # Execute clock
@@ -45,7 +45,7 @@ def main():
         else:
             print(f"An error occurred: {e}")
             print('Please try choosing a clock from the following list:')
-            list_predefined_clocks()
+            ClockType.list_predefined_clocks()
 
 
 if __name__ == "__main__":

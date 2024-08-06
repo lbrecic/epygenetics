@@ -25,7 +25,7 @@ from epygenetics.clocks.chronological_age_predictors.weidner import WeidnerClock
 from epygenetics.clocks.chronological_age_predictors.vidal_bralo import \
     VidalBraloClock
 from epygenetics.clocks.chronological_age_predictors.zhang import ZhangClock
-from epygenetics.clocks.type import ClockType, list_predefined_clocks
+from epygenetics.clocks.type import ClockType
 from epygenetics.clocks.gestational_and_pediatric_age_predictors.bohlin import \
     BohlinClock
 from epygenetics.clocks.gestational_and_pediatric_age_predictors.knight import \
@@ -113,5 +113,5 @@ class ClockFactory:
             return SmokingMcCartneyClock()
         else:
             print('Provided clock type is not recognized. Please choose from the following list:')
-            list_predefined_clocks()
+            ClockType.list_predefined_clocks()
             raise ValueError(f"Clock type {clock_type} not recognized")
