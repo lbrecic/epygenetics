@@ -7,3 +7,4 @@ scipy
 mypy
 flake8
 isort
+scikit-learn

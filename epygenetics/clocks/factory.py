@@ -1,3 +1,4 @@
+from epygenetics.clocks.base_clocks.clock import Clock
 from epygenetics.clocks.biological_age_and_mortality_predictors.hrs_in_ch_pheno_age import \
     HRSInCHPhenoAgeClock
 from epygenetics.clocks.biological_age_and_mortality_predictors.non_prc_pheno_age import \
@@ -8,8 +9,6 @@ from epygenetics.clocks.biological_age_and_mortality_predictors.prc_pheno_age im
     PRCPhenoAgeClock
 from epygenetics.clocks.cancer_and_mitotic_rates_predictors.epitoc import \
     EpiTOCClock
-from epygenetics.clocks.cancer_and_mitotic_rates_predictors.epitoc2 import \
-    EpiTOC2Clock
 from epygenetics.clocks.cancer_and_mitotic_rates_predictors.hypo_clock import \
     HypoClock
 from epygenetics.clocks.cancer_and_mitotic_rates_predictors.miage import \
@@ -20,22 +19,23 @@ from epygenetics.clocks.chronological_age_predictors.bocklandt import \
     BocklandtClock
 from epygenetics.clocks.chronological_age_predictors.garagnani import \
     GaragnaniClock
+from epygenetics.clocks.chronological_age_predictors.hannum import HannumClock
 from epygenetics.clocks.chronological_age_predictors.lin import LinClock
-from epygenetics.clocks.chronological_age_predictors.weidner import WeidnerClock
 from epygenetics.clocks.chronological_age_predictors.vidal_bralo import \
     VidalBraloClock
+from epygenetics.clocks.chronological_age_predictors.weidner import \
+    WeidnerClock
 from epygenetics.clocks.chronological_age_predictors.zhang import ZhangClock
-from epygenetics.clocks.type import ClockType
 from epygenetics.clocks.gestational_and_pediatric_age_predictors.bohlin import \
     BohlinClock
 from epygenetics.clocks.gestational_and_pediatric_age_predictors.knight import \
     KnightClock
 from epygenetics.clocks.gestational_and_pediatric_age_predictors.lee_control import \
     LeeControlClock
-from epygenetics.clocks.gestational_and_pediatric_age_predictors.lee_robust import \
-    LeeRobustClock
 from epygenetics.clocks.gestational_and_pediatric_age_predictors.lee_refined_robust import \
     LeeRefinedRobustClock
+from epygenetics.clocks.gestational_and_pediatric_age_predictors.lee_robust import \
+    LeeRobustClock
 from epygenetics.clocks.gestational_and_pediatric_age_predictors.mayne import \
     MayneClock
 from epygenetics.clocks.gestational_and_pediatric_age_predictors.pedbe import \
@@ -47,10 +47,9 @@ from epygenetics.clocks.non_blood_clocks.horvath_skin_and_blood import \
 from epygenetics.clocks.trait_predictors.alcohol_mccartney import \
     AlcoholMcCartneyClock
 from epygenetics.clocks.trait_predictors.bmi_mccartney import BMIMcCartneyClock
-from epygenetics.clocks.chronological_age_predictors.hannum import HannumClock
 from epygenetics.clocks.trait_predictors.smoking_mccartney import \
     SmokingMcCartneyClock
-from epygenetics.clocks.base_clocks.clock import Clock
+from epygenetics.clocks.type import ClockType
 
 
 class ClockFactory:
@@ -65,8 +64,6 @@ class ClockFactory:
             return PRCPhenoAgeClock()
         elif clock_type == ClockType.EPITOC:
             return EpiTOCClock()
-        elif clock_type == ClockType.EPITOC2:
-            return EpiTOC2Clock
         elif clock_type == ClockType.HYPO_CLOCK:
             return HypoClock()
         elif clock_type == ClockType.MIAGE:

@@ -4,7 +4,6 @@ import numpy as np
 import pandas as pd
 
 from epygenetics.clocks.base_clocks.clock import Clock
-from epygenetics.utils.mean_impute import mean_impute
 
 
 class RegressionClock(Clock):
@@ -25,7 +24,8 @@ class RegressionClock(Clock):
             print(f"Imputation of missing CpG Values occurred for {self.name}")
             for cpg in self.cpgs[self.marker_name]:
                 if cpg not in dna_m.columns:
-                    mean_val: Optional[float] = mean_impute(cpg_imputation)
+                    headers = cpg_imputation.columns.tolist()
+                    mean_val: Optional[float] = cpg_imputation[cpg_imputation[headers[0]] == cpg][headers[1]].values[0]
                     if mean_val is None:
                         raise ValueError(f"No imputation value provided for missing CpG: {cpg}")
                     dna_m[cpg] = mean_val

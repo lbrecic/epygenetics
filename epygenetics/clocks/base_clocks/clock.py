@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any, Optional, Tuple
+from typing import Any, Optional, Tuple, Union
 
 import numpy as np
 import pandas as pd
@@ -15,11 +15,11 @@ class Clock(ABC):
         self.cpgs = pd.read_csv(path)
 
     @abstractmethod
-    def check_cpgs(self, dna_m: pd.DataFrame, cpg_imputation: Optional[pd.DataFrame], imputation: bool) -> Tuple[np.ndarray, Any]:
+    def check_cpgs(self, dna_m: pd.DataFrame, cpg_imputation: Optional[pd.DataFrame], imputation: bool) -> Tuple[np.ndarray, bool]:
         pass
 
     @abstractmethod
-    def calculate(self, common_cpgs: np.ndarray, cpg_check: Any, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], imputation: bool) -> Any:
+    def calculate(self, common_cpgs: np.ndarray, cpg_check: Any, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], imputation: bool) -> Union[pd.DataFrame, pd.Series]:
         pass
 
     def execute(self, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame] = None, cpg_imputation: Optional[pd.DataFrame] = None, imputation: bool = False) -> None:

@@ -19,7 +19,8 @@ class LinearClock(Clock):
             print(f"Imputation of missing CpG Values occurred for {self.name}")
             for cpg in self.cpgs:
                 if cpg not in dna_m.columns:
-                    mean_val: Optional[float] = cpg_imputation.get(cpg, None)
+                    headers = cpg_imputation.columns.tolist()
+                    mean_val: Optional[float] = cpg_imputation[cpg_imputation[headers[0]] == cpg][headers[1]].values[0]
                     if mean_val is None:
                         raise ValueError(f"No imputation value provided for missing CpG: {cpg}")
                     dna_m[cpg] = mean_val

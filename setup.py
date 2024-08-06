@@ -21,6 +21,7 @@ setup(
         "mypy",
         "flake8",
         "isort",
+        "scikit-learn",
     ],
     classifiers=[
         'Programming Language :: Python :: 3',

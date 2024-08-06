@@ -1,13 +1,17 @@
 import argparse
 import sys
+import traceback
+from warnings import simplefilter
 
 import pandas as pd
-import traceback
-from epygenetics.clocks.type import ClockType
+
 from epygenetics.clocks.factory import ClockFactory
+from epygenetics.clocks.type import ClockType
 
 
 def main():
+    simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
+
     parser = argparse.ArgumentParser(description="Clock Execution Script")
     parser.add_argument('--clock', type=str, required=True, help="Name of the clock to execute")
     parser.add_argument('--dnam', type=str, required=True, help="Path to DNA methylation betas file")

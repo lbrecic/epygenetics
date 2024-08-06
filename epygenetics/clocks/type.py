@@ -7,7 +7,6 @@ class ClockType(StrEnum):
     PRC_PHENO_AGE = 'prcPhenoAge'
     PHENO_AGE = 'PhenoAge'
     EPITOC = 'EpiTOC'
-    EPITOC2 = 'EpiTOC2'
     HYPO_CLOCK = 'hypoClock'
     MIAGE = 'MiAge'
     BOCKLANDT = 'Bocklandt'
@@ -43,8 +42,6 @@ class ClockType(StrEnum):
             return ClockType.PHENO_AGE
         elif label == 'EpiTOC':
             return ClockType.EPITOC
-        elif label == 'EpiTOC2':
-            return ClockType.EPITOC2
         elif label == 'hypoClock':
             return ClockType.HYPO_CLOCK
         elif label == 'MiAge':
