@@ -8,3 +8,4 @@ mypy
 flake8
 isort
 scikit-learn
+pytest

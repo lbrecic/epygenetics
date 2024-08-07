@@ -1,6 +1,6 @@
 from epygenetics.clocks.type import ClockType
 
-res_no_pheno = {
+methylCIPHER = {
     ClockType.HRS_IN_CH_PHENO_AGE: [55.52177, 5512549, 55.58441, 55.67962, 55.72232],
     ClockType.NON_PRC_PHENO_AGE: [],
     ClockType.PRC_PHENO_AGE: [],
@@ -30,7 +30,7 @@ res_no_pheno = {
     ClockType.SMOKING_MCCARTNEY: [3.993508, 4.501657, 3.173744, 3.216788, 4.414541],
 }
 
-res_pheno = {
+epygenetics = {
     ClockType.HRS_IN_CH_PHENO_AGE: [],
     ClockType.NON_PRC_PHENO_AGE: [],
     ClockType.PRC_PHENO_AGE: [],
