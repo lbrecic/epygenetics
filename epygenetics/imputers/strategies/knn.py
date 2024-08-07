@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from sklearn.metrics import nan_euclidean_distances
+from sklearn.neighbors import NearestNeighbors
 
 from epygenetics.imputers.base_imputer import BaseImputer
 
@@ -11,7 +11,7 @@ class KNNImputer(BaseImputer):
 
     def impute(self, dna_m: pd.DataFrame) -> pd.DataFrame:
         """
-        This function imputes missing values in a pandas DataFrame using a column-wise K-Nearest Neighbors algorithm.
+        This function imputes missing values in a pandas DataFrame using a row-wise K-Nearest Neighbors algorithm.
 
         Parameters:
         df (pd.DataFrame): The input DataFrame with missing values.
@@ -20,22 +20,35 @@ class KNNImputer(BaseImputer):
         Returns:
         pd.DataFrame: A DataFrame with missing values imputed using the KNN algorithm.
         """
-        dna_m_imputed = dna_m.copy()
+        # Iterate over each row in the DataFrame
+        for row_idx in dna_m.index:
+            row = dna_m.loc[row_idx]
 
-        for col in dna_m.columns:
-            if dna_m[col].isna().any():
-                # Compute the distance between columns
-                distances = nan_euclidean_distances(dna_m.T)
-                col_index = dna_m.columns.get_loc(col)
-                distances[col_index, col_index] = np.inf  # Ignore self-distance
+            # Identify columns with and without NaN values
+            nan_cols = row.index[row.isna()]
+            non_nan_cols = row.index[~row.isna()]
 
-                # Find the indices of the n-nearest neighboring columns
-                neighbors_idx = np.argsort(distances[col_index])[:self.n_neighbors]
+            if len(non_nan_cols) == 0:
+                continue  # If all values in the row are NaN, skip imputation
 
-                # Calculate the mean of the neighboring columns for each row
-                for row in dna_m.index[dna_m[col].isna()]:
-                    neighbor_values = dna_m.iloc[row, neighbors_idx].dropna()
-                    if not neighbor_values.empty:
-                        dna_m_imputed.at[row, col] = neighbor_values.mean()
+            # Extract non-NaN values
+            non_nan_values = row[non_nan_cols].values.reshape(1, -1)
 
-        return dna_m_imputed
+            # Fit NearestNeighbors model on non-NaN values
+            knn = NearestNeighbors(n_neighbors=min(self.n_neighbors, len(non_nan_values[0])))
+            knn.fit(np.arange(len(non_nan_values[0])).reshape(-1, 1), non_nan_values[0].reshape(-1, 1))
+
+            # Predict NaN values based on k nearest neighbors
+            for col in nan_cols:
+                col_idx = dna_m.columns.get_loc(col)
+                distances, indices = knn.kneighbors([[col_idx]], return_distance=True)
+                nearest_indices = indices.flatten()
+
+                # Compute the mean of the nearest neighbors
+                neighbor_values = non_nan_values[0][nearest_indices]
+                imputed_value = np.mean(neighbor_values)
+
+                # Update the imputed DataFrame
+                dna_m.at[row_idx, col] = imputed_value
+
+        return dna_m
