@@ -7,11 +7,11 @@ from epygenetics.clocks.base_clocks.clock import Clock
 
 
 class MeanClock(Clock):
-    def check_cpgs(self, dna_m: pd.DataFrame, cpg_imputation: Optional[pd.DataFrame], imputation: bool) -> Tuple[np.ndarray, bool]:
+    def check_cpgs(self, dna_m: pd.DataFrame, cpg_imputation: Optional[pd.DataFrame], is_imputation: bool) -> Tuple[np.ndarray, bool]:
         present_cpgs: np.ndarray = np.intersect1d(self.cpgs[self.marker_name], dna_m.columns)
         cpg_check: bool = len(self.cpgs[self.marker_name]) == len(present_cpgs)
 
-        if not cpg_check and imputation:
+        if not cpg_check and is_imputation:
             if cpg_imputation is None:
                 raise ValueError("Necessary CpG is missing and no imputation data provided!")
 
@@ -28,8 +28,8 @@ class MeanClock(Clock):
 
         return present_cpgs, cpg_check
 
-    def calculate(self, common_cpgs: np.ndarray, cpg_check: bool, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], imputation: bool) -> Union[pd.DataFrame, pd.Series]:
-        if cpg_check or imputation:
+    def calculate(self, common_cpgs: np.ndarray, cpg_check: bool, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], is_imputation: bool) -> Union[pd.DataFrame, pd.Series]:
+        if cpg_check or is_imputation:
             map_idx = dna_m.columns.get_indexer(common_cpgs)
             mean_v = dna_m.iloc[:, map_idx].mean(axis=1, skipna=True)
 

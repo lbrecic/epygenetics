@@ -49,7 +49,7 @@ def main() -> None:
 
         # Create clock
         clock_type: ClockType = ClockType.from_str(args.clock)
-        clock = ClockFactory().create_clock(clock_type)
+        clock = ClockFactory.create_clock(clock_type)
 
         # Execute clock
         clock.execute(dna_m, pheno, cpg_imputation, is_imputation)

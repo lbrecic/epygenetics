@@ -7,11 +7,11 @@ from epygenetics.clocks.base_clocks.clock import Clock
 
 
 class LinearClock(Clock):
-    def check_cpgs(self, dna_m: pd.DataFrame, cpg_imputation: Optional[pd.DataFrame], imputation: bool) -> Tuple[np.ndarray, bool]:
+    def check_cpgs(self, dna_m: pd.DataFrame, cpg_imputation: Optional[pd.DataFrame], is_imputation: bool) -> Tuple[np.ndarray, bool]:
         present_cpgs: np.ndarray = np.intersect1d(self.cpgs, dna_m.columns)
         cpg_check: bool = len(self.cpgs) == len(present_cpgs)
 
-        if not cpg_check and imputation:
+        if not cpg_check and is_imputation:
             if cpg_imputation is None:
                 raise ValueError("Necessary CpG is missing and no imputation data provided!")
 
@@ -28,7 +28,7 @@ class LinearClock(Clock):
 
         return present_cpgs, cpg_check
 
-    def calculate(self, present_cpgs: np.ndarray, cpg_check: bool, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], imputation: bool) -> Union[pd.DataFrame, pd.Series]:
+    def calculate(self, present_cpgs: np.ndarray, cpg_check: bool, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], is_imputation: bool) -> Union[pd.DataFrame, pd.Series]:
         data: pd.DataFrame = dna_m[present_cpgs]
 
         if pheno is not None:

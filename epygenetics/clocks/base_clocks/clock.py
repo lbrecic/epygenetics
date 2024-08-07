@@ -15,14 +15,14 @@ class Clock(ABC):
         self.cpgs = pd.read_csv(path)
 
     @abstractmethod
-    def check_cpgs(self, dna_m: pd.DataFrame, cpg_imputation: Optional[pd.DataFrame], imputation: bool) -> Tuple[np.ndarray, bool]:
+    def check_cpgs(self, dna_m: pd.DataFrame, cpg_imputation: Optional[pd.DataFrame], is_imputation: bool) -> Tuple[np.ndarray, bool]:
         pass
 
     @abstractmethod
-    def calculate(self, common_cpgs: np.ndarray, cpg_check: Any, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], imputation: bool) -> Union[pd.DataFrame, pd.Series]:
+    def calculate(self, common_cpgs: np.ndarray, cpg_check: Any, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], is_imputation: bool) -> Union[pd.DataFrame, pd.Series]:
         pass
 
-    def execute(self, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame] = None, cpg_imputation: Optional[pd.DataFrame] = None, imputation: bool = False) -> None:
-        cpgs, cpg_check = self.check_cpgs(dna_m, cpg_imputation, imputation)
-        result = self.calculate(cpgs, cpg_check, dna_m, pheno, imputation)
+    def execute(self, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame] = None, cpg_imputation: Optional[pd.DataFrame] = None, is_imputation: bool = False) -> None:
+        cpgs, cpg_check = self.check_cpgs(dna_m, cpg_imputation, is_imputation)
+        result = self.calculate(cpgs, cpg_check, dna_m, pheno, is_imputation)
         print(result)

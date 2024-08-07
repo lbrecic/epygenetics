@@ -53,7 +53,8 @@ from epygenetics.clocks.type import ClockType
 
 
 class ClockFactory:
-    def create_clock(self, clock_type: ClockType) -> Clock:
+    @staticmethod
+    def create_clock(clock_type: ClockType) -> Clock:
         if clock_type == ClockType.HRS_IN_CH_PHENO_AGE:
             return HRSInCHPhenoAgeClock()
         elif clock_type == ClockType.NON_PRC_PHENO_AGE:

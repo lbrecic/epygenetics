@@ -13,8 +13,8 @@ class PEDBEClock(RegressionClock):
         cpgs: Optional[pd.DataFrame] = pd.read_csv('data/CpGs/PEDBE_CpGs.csv')
         super().__init__(ClockType.PEDBE, 'ID', 'Coef', -2.10, cpgs)
 
-    def calculate(self, common_cpgs: np.ndarray, cpg_check: bool, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], imputation: bool) -> Union[pd.DataFrame, pd.Series]:
-        if cpg_check or imputation:
+    def calculate(self, common_cpgs: np.ndarray, cpg_check: bool, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], is_imputation: bool) -> Union[pd.DataFrame, pd.Series]:
+        if cpg_check or is_imputation:
             beta_values: pd.DataFrame = dna_m[common_cpgs]
             coefficients: pd.Series = self.cpgs.set_index(self.marker_name).loc[common_cpgs, self.coef_name]
             tt: np.ndarray = np.dot(beta_values, coefficients) - 2.10
