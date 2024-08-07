@@ -4,10 +4,12 @@ import numpy as np
 import pandas as pd
 
 from epygenetics.clocks.base_clocks.clock import Clock
+from epygenetics.imputers.type import ImputerType
 
 
 class MeanClock(Clock):
-    def check_cpgs(self, dna_m: pd.DataFrame, cpg_imputation: Optional[pd.DataFrame], is_imputation: bool) -> Tuple[np.ndarray, bool]:
+    def check_cpgs(self, dna_m: pd.DataFrame, is_imputation: bool = False, imputer_type=ImputerType.REGULAR,
+                   cpg_imputation: Optional[pd.DataFrame] = None) -> Tuple[np.ndarray, bool]:
         present_cpgs: np.ndarray = np.intersect1d(self.cpgs[self.marker_name], dna_m.columns)
         cpg_check: bool = len(self.cpgs[self.marker_name]) == len(present_cpgs)
 
@@ -28,9 +30,9 @@ class MeanClock(Clock):
 
         return present_cpgs, cpg_check
 
-    def calculate(self, common_cpgs: np.ndarray, cpg_check: bool, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], is_imputation: bool) -> Union[pd.DataFrame, pd.Series]:
+    def calculate(self, dna_m: pd.DataFrame, present_cpgs: np.ndarray, cpg_check: bool, pheno: Optional[pd.DataFrame], is_imputation: bool) -> Union[pd.DataFrame, pd.Series]:
         if cpg_check or is_imputation:
-            map_idx = dna_m.columns.get_indexer(common_cpgs)
+            map_idx = dna_m.columns.get_indexer(present_cpgs)
             mean_v = dna_m.iloc[:, map_idx].mean(axis=1, skipna=True)
 
             if pheno is not None:

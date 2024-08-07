@@ -6,17 +6,18 @@ from epygenetics.imputers.base_imputer import BaseImputer
 class MedianImputer(BaseImputer):
     def impute(self, dna_m: pd.DataFrame) -> pd.DataFrame:
         """
-        This function imputers missing values in a pandas DataFrame using the median of each column.
+        This function imputes median values for all np.NaN values in each row.
+        The median is calculated from other column values in the same row that are not np.NaN.
 
         Parameters:
-        df (pd.DataFrame): The input DataFrame with missing values.
+        df (pd.DataFrame): The input DataFrame with potential np.NaN values.
 
         Returns:
-        pd.DataFrame: A DataFrame with missing values imputed using the median.
+        pd.DataFrame: DataFrame with np.NaN values imputed with row-wise median.
         """
-        # Ensure the input is a DataFrame
-        if not isinstance(dna_m, pd.DataFrame):
-            raise ValueError("Input must be a pandas DataFrame")
+        # Calculate the median for each row and replace NaN values with the median
+        for index, row in dna_m.iterrows():
+            median_value = row.median()  # Calculate the median of non-NaN values in the row
+            dna_m.loc[index] = row.fillna(median_value)  # Fill NaN values with the calculated median
 
-        # Perform median imputation
-        return dna_m.apply(lambda x: x.fillna(x.median()), axis=0)
+        return dna_m

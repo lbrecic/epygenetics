@@ -13,7 +13,7 @@ class DNAmAgeCorticalClock(RegressionClock):
         cpgs: Optional[pd.DataFrame] = pd.read_csv('data/CpGs/DNAmClockCortical_CpGs.csv')
         super().__init__(ClockType.DNAM_AGE_CORTICAL, 'CpGs', 'coef', 0.577682570446177, cpgs)
 
-    def calculate(self, common_cpgs: np.ndarray, cpg_check: bool, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], is_imputation: bool) -> Union[pd.DataFrame, pd.Series]:
+    def calculate(self, dna_m: pd.DataFrame, common_cpgs: np.ndarray, cpg_check: bool, pheno: Optional[pd.DataFrame], is_imputation: bool) -> Union[pd.DataFrame, pd.Series]:
         if cpg_check or is_imputation:
             beta_values: pd.DataFrame = dna_m[common_cpgs]
             coefficients: pd.Series = self.cpgs.set_index(self.marker_name).loc[common_cpgs, self.coef_name]

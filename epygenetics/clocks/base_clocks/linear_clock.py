@@ -4,10 +4,12 @@ import numpy as np
 import pandas as pd
 
 from epygenetics.clocks.base_clocks.clock import Clock
+from epygenetics.imputers.type import ImputerType
 
 
 class LinearClock(Clock):
-    def check_cpgs(self, dna_m: pd.DataFrame, cpg_imputation: Optional[pd.DataFrame], is_imputation: bool) -> Tuple[np.ndarray, bool]:
+    def check_cpgs(self, dna_m: pd.DataFrame, is_imputation: bool = False, imputer_type=ImputerType.REGULAR,
+                   cpg_imputation: Optional[pd.DataFrame] = None) -> Tuple[np.ndarray, bool]:
         present_cpgs: np.ndarray = np.intersect1d(self.cpgs, dna_m.columns)
         cpg_check: bool = len(self.cpgs) == len(present_cpgs)
 
@@ -28,7 +30,7 @@ class LinearClock(Clock):
 
         return present_cpgs, cpg_check
 
-    def calculate(self, present_cpgs: np.ndarray, cpg_check: bool, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], is_imputation: bool) -> Union[pd.DataFrame, pd.Series]:
+    def calculate(self, dna_m: pd.DataFrame, present_cpgs: np.ndarray, cpg_check: bool, pheno: Optional[pd.DataFrame], is_imputation: bool) -> Union[pd.DataFrame, pd.Series]:
         data: pd.DataFrame = dna_m[present_cpgs]
 
         if pheno is not None:

@@ -14,7 +14,7 @@ class MiAgeClock(RegressionClock):
         super().__init__(ClockType.MIAGE, 'CpGs', 'Age-hyper/Age-hypo', 0, cpgs)
         self.miage_params: Tuple[Any, ...] = miage_params
 
-    def calculate(self, common_cpgs: np.ndarray, cpg_check: bool, dna_m: pd.DataFrame, pheno: Optional[pd.DataFrame], is_imputation: bool) -> Union[pd.DataFrame, pd.Series]:
+    def calculate(self, dna_m: pd.DataFrame, common_cpgs: np.ndarray, cpg_check: bool, pheno: Optional[pd.DataFrame], is_imputation: bool) -> Union[pd.DataFrame, pd.Series]:
         if cpg_check or is_imputation:
             beta_values: pd.DataFrame = dna_m[common_cpgs]
             transposed_data: pd.DataFrame = beta_values.T  # Transpose data to match expected input format

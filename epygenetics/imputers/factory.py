@@ -2,12 +2,12 @@ from typing import Optional
 
 import pandas as pd
 
+from epygenetics.imputers.base_imputer import BaseImputer
 from epygenetics.imputers.strategies.knn import KNNImputer
 from epygenetics.imputers.strategies.mean import MeanImputer
-from epygenetics.imputers.strategies.regular import RegularImputer
 from epygenetics.imputers.strategies.median import MedianImputer
 from epygenetics.imputers.strategies.mice import MICEImputer
-from epygenetics.imputers.base_imputer import BaseImputer
+from epygenetics.imputers.strategies.regular import RegularImputer
 from epygenetics.imputers.type import ImputerType
 
 
@@ -23,6 +23,8 @@ class ImputerFactory:
         elif imputer_type == ImputerType.MEAN:
             return MeanImputer()
         elif imputer_type == ImputerType.REGULAR:
+            if cpg_imputation is None:
+                raise ValueError("Necessary CpG is missing and no imputation data provided!")
             return RegularImputer(cpg_imputation)
         else:
             print('Provided imputer type is not recognized. Please choose from the following list:')

@@ -6,16 +6,18 @@ from epygenetics.imputers.base_imputer import BaseImputer
 class MeanImputer(BaseImputer):
     def impute(self, dna_m: pd.DataFrame) -> pd.DataFrame:
         """
-            Perform mean imputation for singly missing CpGs in a dataframe of CpG Betas.
+        This function imputes mean values for all np.NaN values in each row.
+        The mean is calculated from other column values in the same row that are not np.NaN.
 
-            Parameters:
-            df : DataFrame
-                A pandas DataFrame of CpG Betas with missing values.
+        Parameters:
+        df (pd.DataFrame): The input DataFrame with potential np.NaN values.
 
-            Returns:
-            DataFrame
-                Mean imputed DataFrame.
-            """
-        # Apply a lambda function to each column in the DataFrame
-        # The lambda function checks for missing values and replaces them with the mean of the column
-        return dna_m.apply(lambda x: x.fillna(x.mean()), axis=0)
+        Returns:
+        pd.DataFrame: DataFrame with np.NaN values imputed with row-wise mean.
+        """
+        # Calculate the mean for each row and replace NaN values with the mean
+        for index, row in dna_m.iterrows():
+            mean_value = row.mean()  # Calculate the mean of non-NaN values in the row
+            dna_m.loc[index] = row.fillna(mean_value)  # Fill NaN values with the calculated mean
+
+        return dna_m

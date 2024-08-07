@@ -1,6 +1,5 @@
 from typing import Optional
 
-import numpy as np
 import pandas as pd
 
 from epygenetics.imputers.base_imputer import BaseImputer
@@ -15,7 +14,7 @@ class RegularImputer(BaseImputer):
             raise ValueError("Inputs must be a pandas DataFrame")
 
         for cpg in dna_m.columns:
-            if dna_m[cpg][0] is np.nan:
+            if dna_m[cpg].isna().all():
                 headers = self.cpg_imputation.columns.tolist()
                 dna_m[cpg] = self.cpg_imputation[self.cpg_imputation[headers[0]] == cpg][headers[1]].values[0]
 
