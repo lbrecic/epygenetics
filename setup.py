@@ -35,6 +35,7 @@ setup(
         'console_scripts': [
             'epygenetics = epygenetics.main:main',
             'analysis = epygenetics.analysis:main',
+            'test = epygenetics.test:main',
         ],
     },
 )
