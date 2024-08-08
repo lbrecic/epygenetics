@@ -23,6 +23,7 @@ setup(
         "isort",
         "scikit-learn",
         "pytest",
+        "tabulate",
     ],
     classifiers=[
         'Programming Language :: Python :: 3',

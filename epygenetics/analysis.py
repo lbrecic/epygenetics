@@ -27,7 +27,7 @@ def run_isort() -> None:
     run_command("isort .")
 
 
-def main() -> None:
+def analysis() -> None:
     parser = argparse.ArgumentParser(description="Run code quality checks.")
     parser.add_argument('--mypy', action='store_true', help="Run mypy")
     parser.add_argument('--flake8', action='store_true', help="Run flake8")
@@ -49,4 +49,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    analysis()

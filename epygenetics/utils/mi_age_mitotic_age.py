@@ -5,7 +5,7 @@ from epygenetics.utils.mi_age_fr_2 import miage_fr2
 from epygenetics.utils.mi_age_grr_2 import miage_grr2
 
 
-def miage_mitotic_age(beta: np.ndarray, b: float, c: float, d: float) -> np.ndarray:
+def miage_mitotic_age(beta: np.ndarray, b: float = 0.5, c: float = 0.5, d: float = 0.5) -> np.ndarray:
     """
     Estimate the MiAge using optimization to minimize the MiAge_fr2 for each patient.
 
