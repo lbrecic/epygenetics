@@ -21,7 +21,9 @@ class ImputerType(StrEnum):
         elif label == 'regular':
             return ImputerType.REGULAR
         else:
-            raise ValueError(f"Invalid imputer type: {label}")
+            print('Provided imputer type is not recognized. Please choose from the following list:')
+            ImputerType.list_available_imputers()
+            raise NotImplementedError(f"Invalid imputer type: {label}")
 
     @staticmethod
     def list_available_imputers() -> None:

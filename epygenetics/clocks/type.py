@@ -87,6 +87,8 @@ class ClockType(StrEnum):
         elif label == 'Smoking_McCartney':
             return ClockType.SMOKING_MCCARTNEY
         else:
+            print('Provided clock type is not recognized. Please choose from the following list:')
+            ClockType.list_predefined_clocks()
             raise NotImplementedError(f"Clock type {label} is not implemented")
 
     @staticmethod

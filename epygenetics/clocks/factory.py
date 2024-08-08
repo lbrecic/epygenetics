@@ -112,4 +112,4 @@ class ClockFactory:
         else:
             print('Provided clock type is not recognized. Please choose from the following list:')
             ClockType.list_predefined_clocks()
-            raise ValueError(f"Clock type {clock_type} not recognized")
+            raise NotImplementedError(f"Clock type {clock_type} not recognized")

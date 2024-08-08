@@ -14,7 +14,7 @@ class KNNImputer(BaseImputer):
         This function imputes missing values in a pandas DataFrame using a row-wise K-Nearest Neighbors algorithm.
 
         Parameters:
-        df (pd.DataFrame): The input DataFrame with missing values.
+        dna_m (pd.DataFrame): The input DataFrame with missing values.
         n_neighbors (int): Number of neighboring columns to use for imputation (default is 5).
 
         Returns:

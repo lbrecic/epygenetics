@@ -68,8 +68,6 @@ def main() -> None:
             traceback.print_exc()
         else:
             print(f"An error occurred: {e}")
-            print('Please try choosing a clock from the following list:')
-            ClockType.list_predefined_clocks()
 
 
 if __name__ == "__main__":
