@@ -1,5 +1,5 @@
-import tabulate as tb
 import pandas as pd
+import tabulate as tb
 
 import data.test.clock_results
 

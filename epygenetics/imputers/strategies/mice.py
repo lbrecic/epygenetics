@@ -1,7 +1,7 @@
-import pandas as pd
 import numpy as np
-from sklearn.experimental import enable_iterative_imputer  # noqa
+import pandas as pd
 from sklearn.ensemble import HistGradientBoostingRegressor
+from sklearn.experimental import enable_iterative_imputer  # noqa
 
 from epygenetics.imputers.base_imputer import BaseImputer
 
