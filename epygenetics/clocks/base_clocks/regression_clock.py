@@ -10,14 +10,15 @@ from epygenetics.imputers.type import ImputerType
 
 
 class RegressionClock(Clock):
-    def __init__(self, name: str, marker_name: str, coef_name: str, reg_coef: float,
-                 cpgs: Optional[pd.DataFrame] = None):
+    def __init__(self, name: str, marker_name: str, coef_name: str, reg_coef: float, cpgs: Optional[pd.DataFrame] = None):
         super().__init__(name, marker_name, cpgs)
         self.coef_name: str = coef_name
         self.reg_coef: float = reg_coef
 
-    def check_cpgs(self, dna_m: pd.DataFrame, is_imputation: bool = False, imputer_type=ImputerType.REGULAR,
-                   cpg_imputation: Optional[pd.DataFrame] = None) -> Tuple[np.ndarray, bool]:
+    def check_cpgs(self, dna_m: pd.DataFrame, is_imputation: bool = False, imputer_type=ImputerType.REGULAR, cpg_imputation: Optional[pd.DataFrame] = None) -> Tuple[np.ndarray, bool]:
+        if self.cpgs is None:
+            raise ValueError("CpGs not loaded.")
+
         common_cpgs: np.ndarray = np.intersect1d(self.cpgs[self.marker_name], dna_m.columns)
         cpg_check: bool = len(self.cpgs[self.marker_name]) == len(common_cpgs)
 
@@ -35,8 +36,7 @@ class RegressionClock(Clock):
 
         return common_cpgs, cpg_check
 
-    def calculate(self, dna_m: pd.DataFrame, common_cpgs: np.ndarray, cpg_check: bool, pheno: Optional[pd.DataFrame],
-                  is_imputation: bool) -> Union[pd.DataFrame, pd.Series]:
+    def calculate(self, dna_m: pd.DataFrame, common_cpgs: np.ndarray, cpg_check: bool, pheno: Optional[pd.DataFrame], is_imputation: bool) -> Union[pd.DataFrame, pd.Series]:
         if cpg_check or is_imputation:
             beta_values: pd.DataFrame = dna_m[common_cpgs]
             coefficients: pd.Series = self.cpgs.set_index(self.marker_name).loc[common_cpgs, self.coef_name]

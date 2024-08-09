@@ -1,5 +1,6 @@
 import pandas as pd
 import tabulate as tb
+import pytest
 
 import data.test.clock_results
 
@@ -7,12 +8,17 @@ import data.test.clock_results
 def methylCIPHER_comparison() -> None:
     print()
 
+    print("================================================================================================================================================================")
     print("First a comparsion of implemented clocks with package written in programming language R called methylCIPHER is shown.")
     print("Some of the epygenetics clocks had to use imputation and between all implemented imputations here is shown the one that yielded the best results.")
     print("Lin, Vidal-Bralo, Lee-Control, Lee-Robust, Lee-Refined-Robust, Mayne, PEDBE, Horvath2 all use KNN imputation.")
     print("Bohlin, Knight and DNAm Cortical use regulat imputation using pre-calculated median values of the golden standard sesame-450k-median.")
     print()
     print("After showing you the results of clocks implemented both in methylCIPHER and epygenetics, a (non)prc PhenoAge clocks results are shown for both.")
+    print("================================================================================================================================================================")
+    print()
+
+    print("Following comparisons are run with a dna methylation data found in 'epygenetics/data/examples/exampleBetas.csv:")
     print()
 
     print("methylCIPHER")
@@ -25,6 +31,13 @@ def methylCIPHER_comparison() -> None:
     df = data.test.clock_results.epygenetics
     print(tb.tabulate(df, headers='keys', tablefmt='pretty'))
 
+    print()
+
+    print("================================================================================================================================================================")
+    print()
+
+    print("Following comparisons are run with a dna methylation data found in 'epygenetics/data/examples/exampleBetas_2.csv:")
+    print("Pheno data can be found in 'epygenetics/data/examples/examplePheno_2.csv:")
     print()
 
     print("methylCIPHER - PRC Pheno Age")
@@ -53,11 +66,12 @@ def methylCIPHER_comparison() -> None:
     print()
 
 
-def test() -> None:
+def testing() -> None:
     pd.set_option('display.max_rows', None)
 
     methylCIPHER_comparison()
 
 
 if __name__ == "__main__":
-    test()
+    testing()
+    pytest.main(["--no-header", "-v", "epygenetics/test"])

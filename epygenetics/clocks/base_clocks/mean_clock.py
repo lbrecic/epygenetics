@@ -5,27 +5,28 @@ import pandas as pd
 
 from epygenetics.clocks.base_clocks.clock import Clock
 from epygenetics.imputers.type import ImputerType
+from epygenetics.imputers.base_imputer import BaseImputer
+from epygenetics.imputers.factory import ImputerFactory
 
 
 class MeanClock(Clock):
-    def check_cpgs(self, dna_m: pd.DataFrame, is_imputation: bool = False, imputer_type=ImputerType.REGULAR,
-                   cpg_imputation: Optional[pd.DataFrame] = None) -> Tuple[np.ndarray, bool]:
+    def check_cpgs(self, dna_m: pd.DataFrame, is_imputation: bool = False, imputer_type=ImputerType.REGULAR, cpg_imputation: Optional[pd.DataFrame] = None) -> Tuple[np.ndarray, bool]:
+        if self.cpgs is None:
+            raise ValueError("CpGs not loaded.")
+
         present_cpgs: np.ndarray = np.intersect1d(self.cpgs[self.marker_name], dna_m.columns)
         cpg_check: bool = len(self.cpgs[self.marker_name]) == len(present_cpgs)
 
         if not cpg_check and is_imputation:
-            if cpg_imputation is None:
-                raise ValueError("Necessary CpG is missing and no imputation data provided!")
-
             # Impute missing CpG values
             print(f"Imputation of missing CpG Values occurred for {self.name}")
-            for cpg in self.cpgs:
+            for cpg in self.cpgs[self.marker_name]:
                 if cpg not in dna_m.columns:
-                    headers = cpg_imputation.columns.tolist()
-                    mean_val: Optional[float] = cpg_imputation[cpg_imputation[headers[0]] == cpg][headers[1]].values[0]
-                    if mean_val is None:
-                        raise ValueError(f"No imputation value provided for missing CpG: {cpg}")
-                    dna_m[cpg] = mean_val
+                    dna_m[cpg] = np.nan
+
+            imputer: BaseImputer = ImputerFactory.create_imputer(imputer_type, cpg_imputation)
+            imputer.impute(dna_m)
+
             present_cpgs = self.cpgs[self.marker_name].values
 
         return present_cpgs, cpg_check
