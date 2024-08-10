@@ -1,7 +1,8 @@
 import unittest
-from unittest.mock import patch, MagicMock
-import pandas as pd
+from unittest.mock import MagicMock, patch
+
 import numpy as np
+import pandas as pd
 
 from epygenetics.clocks.base_clocks.regression_clock import RegressionClock
 from epygenetics.imputers.base_imputer import BaseImputer

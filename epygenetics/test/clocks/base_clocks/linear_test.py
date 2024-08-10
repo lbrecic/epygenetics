@@ -1,7 +1,8 @@
 import unittest
-from unittest.mock import patch, MagicMock
-import pandas as pd
+from unittest.mock import MagicMock, patch
+
 import numpy as np
+import pandas as pd
 import pytest
 
 from epygenetics.clocks.base_clocks.linear_clock import LinearClock

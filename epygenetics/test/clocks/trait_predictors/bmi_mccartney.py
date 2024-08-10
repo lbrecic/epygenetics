@@ -1,5 +1,6 @@
 import unittest
 from unittest.mock import patch
+
 import pandas as pd
 
 from epygenetics.clocks.trait_predictors.bmi_mccartney import BMIMcCartneyClock

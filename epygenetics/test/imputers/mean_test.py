@@ -1,6 +1,7 @@
 import unittest
-import pandas as pd
+
 import numpy as np
+import pandas as pd
 
 from epygenetics.imputers.strategies.mean import MeanImputer
 

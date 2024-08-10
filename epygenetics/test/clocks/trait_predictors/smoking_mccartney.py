@@ -1,8 +1,10 @@
 import unittest
 from unittest.mock import patch
+
 import pandas as pd
 
-from epygenetics.clocks.trait_predictors.smoking_mccartney import SmokingMcCartneyClock
+from epygenetics.clocks.trait_predictors.smoking_mccartney import \
+    SmokingMcCartneyClock
 from epygenetics.clocks.type import ClockType
 
 

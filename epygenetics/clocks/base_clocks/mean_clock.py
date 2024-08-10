@@ -4,9 +4,9 @@ import numpy as np
 import pandas as pd
 
 from epygenetics.clocks.base_clocks.clock import Clock
-from epygenetics.imputers.type import ImputerType
 from epygenetics.imputers.base_imputer import BaseImputer
 from epygenetics.imputers.factory import ImputerFactory
+from epygenetics.imputers.type import ImputerType
 
 
 class MeanClock(Clock):

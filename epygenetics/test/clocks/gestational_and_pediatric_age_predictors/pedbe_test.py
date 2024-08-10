@@ -1,10 +1,12 @@
 import unittest
 from unittest.mock import patch
-import pandas as pd
+
 import numpy as np
+import pandas as pd
 import pytest
 
-from epygenetics.clocks.gestational_and_pediatric_age_predictors.pedbe import PEDBEClock
+from epygenetics.clocks.gestational_and_pediatric_age_predictors.pedbe import \
+    PEDBEClock
 from epygenetics.clocks.type import ClockType
 
 

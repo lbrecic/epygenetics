@@ -1,8 +1,10 @@
 import unittest
 from unittest.mock import patch
+
 import pandas as pd
 
-from epygenetics.clocks.chronological_age_predictors.bocklandt import BocklandtClock
+from epygenetics.clocks.chronological_age_predictors.bocklandt import \
+    BocklandtClock
 from epygenetics.clocks.type import ClockType
 
 

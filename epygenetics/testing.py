@@ -1,7 +1,8 @@
 import argparse
+
 import pandas as pd
-import tabulate as tb
 import pytest
+import tabulate as tb
 
 import data.test.clock_results
 

@@ -1,8 +1,10 @@
 import unittest
 from unittest.mock import patch
+
 import pandas as pd
 
-from epygenetics.clocks.chronological_age_predictors.garagnani import GaragnaniClock
+from epygenetics.clocks.chronological_age_predictors.garagnani import \
+    GaragnaniClock
 from epygenetics.clocks.type import ClockType
 
 

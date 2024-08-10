@@ -1,10 +1,12 @@
 import unittest
 from unittest.mock import patch
-import pandas as pd
+
 import numpy as np
+import pandas as pd
 import pytest
 
-from epygenetics.clocks.non_blood_clocks.dna_m_age_cortical import DNAmAgeCorticalClock
+from epygenetics.clocks.non_blood_clocks.dna_m_age_cortical import \
+    DNAmAgeCorticalClock
 from epygenetics.clocks.type import ClockType
 
 

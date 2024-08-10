@@ -1,8 +1,10 @@
 import unittest
 from unittest.mock import patch
+
 import pandas as pd
 
-from epygenetics.clocks.gestational_and_pediatric_age_predictors.lee_control import LeeControlClock
+from epygenetics.clocks.gestational_and_pediatric_age_predictors.lee_control import \
+    LeeControlClock
 from epygenetics.clocks.type import ClockType
 
 

@@ -1,8 +1,10 @@
 import unittest
 from unittest.mock import patch
+
 import pandas as pd
 
-from epygenetics.clocks.biological_age_and_mortality_predictors.hrs_in_ch_pheno_age import HRSInCHPhenoAgeClock
+from epygenetics.clocks.biological_age_and_mortality_predictors.hrs_in_ch_pheno_age import \
+    HRSInCHPhenoAgeClock
 from epygenetics.clocks.type import ClockType
 
 

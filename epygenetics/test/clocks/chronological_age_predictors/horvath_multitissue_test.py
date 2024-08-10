@@ -1,10 +1,12 @@
 import unittest
 from unittest.mock import patch
-import pandas as pd
+
 import numpy as np
+import pandas as pd
 import pytest
 
-from epygenetics.clocks.chronological_age_predictors.horvath_multitissue import HorvathMultitissueClock
+from epygenetics.clocks.chronological_age_predictors.horvath_multitissue import \
+    HorvathMultitissueClock
 from epygenetics.clocks.type import ClockType
 
 

@@ -1,6 +1,7 @@
 import unittest
-import pandas as pd
+
 import numpy as np
+import pandas as pd
 import pytest
 
 from epygenetics.imputers.strategies.median import MedianImputer

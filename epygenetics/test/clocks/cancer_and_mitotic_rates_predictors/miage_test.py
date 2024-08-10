@@ -1,11 +1,14 @@
 import unittest
 from unittest.mock import patch
-import pandas as pd
+
 import numpy as np
+import pandas as pd
 import pytest
 
-from epygenetics.clocks.cancer_and_mitotic_rates_predictors.miage import MiAgeClock
+from epygenetics.clocks.cancer_and_mitotic_rates_predictors.miage import \
+    MiAgeClock
 from epygenetics.clocks.type import ClockType
+
 
 @pytest.mark.skip(reason="Test is not implemented yet")
 class MiAgeClockTestCase(unittest.TestCase):

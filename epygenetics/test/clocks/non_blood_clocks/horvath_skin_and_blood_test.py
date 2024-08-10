@@ -1,10 +1,12 @@
 import unittest
 from unittest.mock import patch
-import pandas as pd
+
 import numpy as np
+import pandas as pd
 import pytest
 
-from epygenetics.clocks.non_blood_clocks.horvath_skin_and_blood import HorvathSkinAndBloodClock
+from epygenetics.clocks.non_blood_clocks.horvath_skin_and_blood import \
+    HorvathSkinAndBloodClock
 from epygenetics.clocks.type import ClockType
 
 

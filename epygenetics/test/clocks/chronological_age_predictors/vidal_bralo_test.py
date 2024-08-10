@@ -1,8 +1,10 @@
 import unittest
 from unittest.mock import patch
+
 import pandas as pd
 
-from epygenetics.clocks.chronological_age_predictors.vidal_bralo import VidalBraloClock
+from epygenetics.clocks.chronological_age_predictors.vidal_bralo import \
+    VidalBraloClock
 from epygenetics.clocks.type import ClockType
 
 

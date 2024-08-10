@@ -1,8 +1,10 @@
 import unittest
 from unittest.mock import patch
+
 import pandas as pd
 
-from epygenetics.clocks.cancer_and_mitotic_rates_predictors.epitoc import EpiTOCClock
+from epygenetics.clocks.cancer_and_mitotic_rates_predictors.epitoc import \
+    EpiTOCClock
 from epygenetics.clocks.type import ClockType
 
 

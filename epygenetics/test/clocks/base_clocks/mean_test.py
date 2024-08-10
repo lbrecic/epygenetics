@@ -1,11 +1,12 @@
 import unittest
-from unittest.mock import patch, MagicMock
-import pandas as pd
+from unittest.mock import MagicMock, patch
+
 import numpy as np
+import pandas as pd
 
 from epygenetics.clocks.base_clocks.mean_clock import MeanClock
-from epygenetics.imputers.factory import ImputerType
 from epygenetics.imputers.base_imputer import BaseImputer
+from epygenetics.imputers.factory import ImputerType
 
 
 class MeanClockTestCase(unittest.TestCase):

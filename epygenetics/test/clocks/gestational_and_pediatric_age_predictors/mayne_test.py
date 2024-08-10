@@ -1,8 +1,10 @@
 import unittest
 from unittest.mock import patch
+
 import pandas as pd
 
-from epygenetics.clocks.gestational_and_pediatric_age_predictors.mayne import MayneClock
+from epygenetics.clocks.gestational_and_pediatric_age_predictors.mayne import \
+    MayneClock
 from epygenetics.clocks.type import ClockType
 
 
