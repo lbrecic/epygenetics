@@ -1,3 +1,4 @@
+import argparse
 import pandas as pd
 import tabulate as tb
 import pytest
@@ -110,9 +111,21 @@ def methylCIPHER_comparison() -> None:
 def testing() -> None:
     pd.set_option('display.max_rows', None)
 
-    methylCIPHER_comparison()
+    parser = argparse.ArgumentParser(description="Run code automated testing.")
+    parser.add_argument('--unit', action='store_true', help="Run mypy")
+    parser.add_argument('--comparison', action='store_true', help="Run flake8")
+
+    args = parser.parse_args()
+
+    if not any(vars(args).values()):
+        methylCIPHER_comparison()
+        pytest.main(["--no-header", "-v", "epygenetics/test"])
+    else:
+        if args.unit:
+            pytest.main(["--no-header", "-v", "epygenetics/test"])
+        if args.comparison:
+            methylCIPHER_comparison()
 
 
 if __name__ == "__main__":
     testing()
-    pytest.main(["--no-header", "-v", "epygenetics/test"])
