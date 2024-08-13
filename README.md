@@ -17,33 +17,27 @@
 
 To install the `epygenetics` library, clone the repository and install the necessary dependencies:
 
-\`\`\`bash
+`bash
 git clone https://github.com/lbrecic/epygenetics.git
 cd epygenetics
 pip install -r requirements.txt
-\`\`\`
+`
 
 ## Usage
 
 The `epygenetics` library provides three main entry points: execution, analysis, and testing. Each entry point can be executed via the command line using the following format:
 
-\`\`\`bash
-python -m epygenetics.<method_name> --flags...
-\`\`\`
+`bash python -m epygenetics.<method_name> --flags...`
 
 ### Execution
 
 To run an epigenetic clock, use the `execution` method. The following example demonstrates how to execute a specific clock:
 
-\`\`\`bash
-python -m epygenetics.execution -c <clock_name> -d <dnam_file> [options]
-\`\`\`
+`bash python -m epygenetics.execution -c <clock_name> -d <dnam_file> [options]`
 
 #### Example:
 
-\`\`\`bash
-python -m epygenetics.execution -c Horvath1 -d path/to/dnam_file.csv -p path/to/pheno_file.csv -i -f path/to/imputation_file.csv -m regular -v
-\`\`\`
+`bash python -m epygenetics.execution -c Horvath1 -d path/to/dnam_file.csv -p path/to/pheno_file.csv -i -f path/to/imputation_file.csv -m regular -v`
 
 **Flags:**
 
@@ -59,15 +53,11 @@ python -m epygenetics.execution -c Horvath1 -d path/to/dnam_file.csv -p path/to/
 
 To run the automated tests provided in the library, use the `testing` method. The following example demonstrates how to execute the tests:
 
-\`\`\`bash
-python -m epygenetics.testing [options]
-\`\`\`
+`bash python -m epygenetics.testing [options]`
 
 #### Example:
 
-\`\`\`bash
-python -m epygenetics.testing -u
-\`\`\`
+`bash python -m epygenetics.testing -u`
 
 **Flags:**
 
