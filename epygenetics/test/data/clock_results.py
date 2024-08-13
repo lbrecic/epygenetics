@@ -48,7 +48,7 @@ methylCIPHER_type_6 = pd.DataFrame({
 
 epygenetics_type_1 = pd.DataFrame({
     ClockType.HRS_IN_CH_PHENO_AGE: [46.175572, 40.475084, 45.658330, 49.907506, 48.901753],
-    ClockType.PHENO_AGE: [52.293152, 41.058674, 43.544603, 43.966974, np.nan]
+    ClockType.PHENO_AGE: [52.293152, 41.058674, 43.544603, 43.966974, np.nan]  # Not working completely -> bug
 })
 
 epygenetics_type_2 = pd.DataFrame({
@@ -84,9 +84,9 @@ epygenetics_type_5 = pd.DataFrame({
 })
 
 epygenetics_type_6 = pd.DataFrame({
-    ClockType.ALCOHOL_MCCARTNEY: [np.nan, np.nan, np.nan, np.nan, np.nan],  # Not working completely -> bug
+    ClockType.ALCOHOL_MCCARTNEY: [np.nan, np.nan, -12.148776, np.nan, np.nan],  # Not working completely -> bug
     ClockType.BMI_MCCARTNEY: [np.nan, np.nan, np.nan, np.nan, np.nan],  # Not working completely -> bug
-    ClockType.SMOKING_MCCARTNEY: [np.nan, np.nan, np.nan, np.nan, np.nan],  # Not working completely -> bug
+    ClockType.SMOKING_MCCARTNEY: [3.993508, 4.501657, np.nan, 3.216788, np.nan],  # Not working completely -> bug
 })
 
 methylCIPHER_prcPhenoAge_data = pd.DataFrame({

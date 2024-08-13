@@ -13,13 +13,13 @@ from epygenetics.clocks.cancer_and_mitotic_rates_predictors.hypo_clock import \
     HypoClock
 from epygenetics.clocks.cancer_and_mitotic_rates_predictors.miage import \
     MiAgeClock
-from epygenetics.clocks.chronological_age_predictors import \
-    HorvathMultitissueClock
 from epygenetics.clocks.chronological_age_predictors.bocklandt import \
     BocklandtClock
 from epygenetics.clocks.chronological_age_predictors.garagnani import \
     GaragnaniClock
 from epygenetics.clocks.chronological_age_predictors.hannum import HannumClock
+from epygenetics.clocks.chronological_age_predictors.horvath_multitissue import \
+    HorvathMultitissueClock
 from epygenetics.clocks.chronological_age_predictors.lin import LinClock
 from epygenetics.clocks.chronological_age_predictors.vidal_bralo import \
     VidalBraloClock
@@ -53,8 +53,26 @@ from epygenetics.clocks.type import ClockType
 
 
 class ClockFactory:
+    """
+    A factory class responsible for creating instances of different epigenetic clocks based
+    on the specified clock type. This class serves as a central point to instantiate
+    various clocks implemented across different categories.
+    """
+
     @staticmethod
     def create_clock(clock_type: ClockType) -> Clock:
+        """
+        Creates an instance of a specific epigenetic clock based on the provided clock type.
+
+        Parameters:
+            clock_type (ClockType): The type of the clock to be created.
+
+        Returns:
+            Clock: An instance of the specified clock type.
+
+        Raises:
+            NotImplementedError: If the provided clock type is not recognized.
+        """
         if clock_type == ClockType.HRS_IN_CH_PHENO_AGE:
             return HRSInCHPhenoAgeClock()
         elif clock_type == ClockType.NON_PRC_PHENO_AGE:

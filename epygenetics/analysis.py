@@ -27,12 +27,17 @@ def run_isort() -> None:
     run_command("isort .")
 
 
-def analysis() -> None:
+def init_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Run code quality checks.")
-    parser.add_argument('--mypy', action='store_true', help="Run mypy")
-    parser.add_argument('--flake8', action='store_true', help="Run flake8")
-    parser.add_argument('--isort', action='store_true', help="Run isort")
+    parser.add_argument('-m', '--mypy', action='store_true', help="Run mypy")
+    parser.add_argument('-f', '--flake8', action='store_true', help="Run flake8")
+    parser.add_argument('-s', '--isort', action='store_true', help="Run isort")
 
+    return parser
+
+
+def analysis() -> None:
+    parser = init_parser()
     args = parser.parse_args()
 
     if not any(vars(args).values()):

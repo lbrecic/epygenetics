@@ -5,17 +5,20 @@ import pandas as pd
 
 def subset_cg(dat: pd.DataFrame, cg_set: List[str]) -> pd.DataFrame:
     """
-    A function to quickly subset the CpGs you want to work with in a methylation dataframe.
+    Subset a methylation DataFrame to include only the specified CpG sites.
+
+    This function filters the columns of a DataFrame, retaining only those columns that
+    match the CpG probe IDs provided in `cg_set`. It also prints a message if any of the
+    requested CpG sites are missing from the DataFrame.
 
     Parameters:
-    dat : DataFrame
-        The methylation Beta values you will need to subset, where columns are CpGs (and are named), and rows are samples.
-    cg_set : List[str]
-        The character vector of Illumina CpG probe IDs that you will be subsetting to.
+        dat (pd.DataFrame): The input DataFrame containing methylation Beta values,
+                            where columns are CpGs and rows are samples.
+        cg_set (List[str]): A list of Illumina CpG probe IDs to subset the DataFrame.
 
     Returns:
-    DataFrame
-        A new beta methylation matrix with columns of only the CpGs that you wanted to subset to.
+        pd.DataFrame: A new DataFrame containing only the columns corresponding to the
+                      specified CpGs in `cg_set`.
     """
     match1 = dat.columns.isin(cg_set)
     if not match1.any():
@@ -24,8 +27,3 @@ def subset_cg(dat: pd.DataFrame, cg_set: List[str]) -> pd.DataFrame:
 
     dat_reduced = dat.loc[:, match1]
     return dat_reduced
-
-# Example usage:
-# example_betas = pd.read_csv('exampleBetas.csv')
-# horvath_online_ref = pd.read_csv('HorvathOnlineRef.csv')
-# result = subset_cg(example_betas, horvath_online_ref['Name'].tolist())

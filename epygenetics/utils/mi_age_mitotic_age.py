@@ -7,24 +7,23 @@ from epygenetics.utils.mi_age_grr_2 import miage_grr2
 
 def miage_mitotic_age(beta: np.ndarray, b: float = 0.5, c: float = 0.5, d: float = 0.5) -> np.ndarray:
     """
-    Estimate the MiAge using optimization to minimize the MiAge_fr2 for each patient.
+    Estimate the mitotic age (MiAge) for each patient by optimizing the MiAge_fr2 objective function.
 
     Parameters:
-    beta : ndarray
-        Methylation beta values matrix with samples as rows and CpG sites as columns.
-    b, c, d : float
-        Parameters of the MiAge model.
+        beta (np.ndarray): Methylation beta values matrix with samples as rows and CpG sites as columns.
+        b (float): Parameter b of the MiAge model. Defaults to 0.5.
+        c (float): Parameter c of the MiAge model. Defaults to 0.5.
+        d (float): Parameter d of the MiAge model. Defaults to 0.5.
 
     Returns:
-    ndarray
-        Estimated mitotic age for each patient.
+        np.ndarray: Estimated mitotic age for each patient.
     """
     upperage = 10000
     lowerage = 10
-    n = np.full(beta.shape[1], 500)  # initial guesses
+    n = np.full(beta.shape[1], 500)  # initial guesses for mitotic age
     no_initial_n = 5
 
-    # Minimize the objective function for each patient
+    # Minimize the objective function for each CpG site (patient)
     for j in range(beta.shape[1]):
         betaj = beta[:, j]
 
@@ -43,7 +42,3 @@ def miage_mitotic_age(beta: np.ndarray, b: float = 0.5, c: float = 0.5, d: float
             n[j] = best_result.x  # update the best parameter found
 
     return n
-
-# Example usage:
-# Assuming beta, b, c, and d are defined:
-# ages = miage_mitotic_age(beta, b, c, d)

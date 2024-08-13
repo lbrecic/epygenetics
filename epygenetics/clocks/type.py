@@ -2,6 +2,11 @@ from enum import StrEnum
 
 
 class ClockType(StrEnum):
+    """
+    Enum class representing the different types of epigenetic clocks.
+    Each clock type is associated with a specific string identifier.
+    """
+
     HRS_IN_CH_PHENO_AGE = 'HRSInChPhenoAge'
     NON_PRC_PHENO_AGE = 'non_prcPhenoAge'
     PRC_PHENO_AGE = 'prcPhenoAge'
@@ -32,6 +37,18 @@ class ClockType(StrEnum):
 
     @staticmethod
     def from_str(label: str) -> 'ClockType':
+        """
+        Converts a string label to its corresponding `ClockType` enum.
+
+        Parameters:
+            label (str): The string label representing the clock type.
+
+        Returns:
+            ClockType: The corresponding `ClockType` enum.
+
+        Raises:
+            NotImplementedError: If the provided label does not match any known clock types.
+        """
         if label == 'HRSInChPhenoAge':
             return ClockType.HRS_IN_CH_PHENO_AGE
         elif label == 'non_prcPhenoAge':
@@ -93,4 +110,7 @@ class ClockType(StrEnum):
 
     @staticmethod
     def list_predefined_clocks() -> None:
-        [print(e.value) for e in ClockType]
+        """
+        Prints a list of all predefined clock types available in the `ClockType` enum.
+        """
+        [print(e) for e in ClockType]

@@ -13,12 +13,12 @@ def trafo(x: Union[np.ndarray, float], adult_age: int = 20) -> Union[np.ndarray,
     changes than older ages.
 
     Parameters:
-    x : A vector of sample ages.
-    adult_age : The threshold of adulthood, default is 20 years, which differentiates the type of scaling applied.
+        x (Union[np.ndarray, float]): A vector or scalar of sample ages.
+        adult_age (int): The threshold of adulthood, default is 20 years, which differentiates the type of scaling applied.
 
     Returns:
-    A vector of transformed ages. Logarithmic scaling is applied to ages at or below the adulthood
-    threshold, and linear scaling is applied to ages above this threshold.
+        Union[np.ndarray, float]: A vector or scalar of transformed ages. Logarithmic scaling is applied to ages at or below the adulthood
+                                  threshold, and linear scaling is applied to ages above this threshold.
     """
     # Normalize ages by the threshold of adulthood plus one to ensure proper scaling from zero
     x = (x + 1) / (1 + adult_age)

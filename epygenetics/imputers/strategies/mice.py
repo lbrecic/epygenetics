@@ -7,21 +7,32 @@ from epygenetics.imputers.base_imputer import BaseImputer
 
 
 class MICEImputer(BaseImputer):
+    """
+    An imputer class that uses a custom row-wise Multiple Imputation by Chained Equations (MICE)
+    algorithm to impute missing values in a DNA methylation DataFrame. This implementation
+    utilizes a gradient boosting model to predict missing values iteratively.
+    """
+
     def __init__(self, max_iter=10, random_state=None):
+        """
+        Initializes the MICEImputer with the specified number of iterations and random state.
+
+        Parameters:
+            max_iter (int): Maximum number of imputation iterations. Defaults to 10.
+            random_state (int): Random state for reproducibility. Defaults to None.
+        """
         self.max_iter = max_iter
         self.random_state = random_state
 
     def impute(self, dna_m: pd.DataFrame) -> pd.DataFrame:
         """
-        This function imputes missing values in a pandas DataFrame using a custom row-wise MICE algorithm.
+        Imputes missing values in a pandas DataFrame using a custom row-wise MICE algorithm.
 
         Parameters:
-        dna_m (pd.DataFrame): The input DataFrame with missing values.
-        max_iter (int): Maximum number of imputation iterations (default is 10).
-        random_state (int): Random state for reproducibility (default is None).
+            dna_m (pd.DataFrame): The input DataFrame with missing values.
 
         Returns:
-        pd.DataFrame: A DataFrame with missing values imputed using the custom MICE algorithm.
+            pd.DataFrame: A DataFrame with missing values imputed using the custom MICE algorithm.
         """
         for iteration in range(self.max_iter):
             for col in dna_m.columns:

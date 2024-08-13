@@ -12,8 +12,30 @@ from epygenetics.imputers.type import ImputerType
 
 
 class ImputerFactory:
+    """
+    A factory class responsible for creating instances of different imputers based
+    on the specified imputer type. This class serves as a central point to instantiate
+    various imputation strategies for handling missing data.
+    """
+
     @staticmethod
     def create_imputer(imputer_type: ImputerType, cpg_imputation: Optional[pd.DataFrame] = None) -> BaseImputer:
+        """
+        Creates an instance of a specific imputer based on the provided imputer type.
+
+        Parameters:
+            imputer_type (ImputerType): The type of the imputer to be created.
+            cpg_imputation (Optional[pd.DataFrame]): A DataFrame containing CpG imputation data,
+                                                     required for certain imputation strategies like RegularImputer.
+                                                     Defaults to None.
+
+        Returns:
+            BaseImputer: An instance of the specified imputer type.
+
+        Raises:
+            ValueError: If the imputer type is not recognized or if the necessary CpG
+                        imputation data is not provided for the RegularImputer.
+        """
         if imputer_type == ImputerType.KNN:
             return KNNImputer()
         elif imputer_type == ImputerType.MICE:

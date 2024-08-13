@@ -2,6 +2,11 @@ from enum import StrEnum
 
 
 class ImputerType(StrEnum):
+    """
+    Enum class representing the different types of imputers used for handling missing data in epigenetic clocks.
+    Each imputer type is associated with a specific string identifier.
+    """
+
     KNN = 'knn'
     MEAN = 'mean'
     MEDIAN = 'median'
@@ -10,6 +15,18 @@ class ImputerType(StrEnum):
 
     @staticmethod
     def from_str(label: str) -> 'ImputerType':
+        """
+        Converts a string label to its corresponding `ImputerType` enum.
+
+        Parameters:
+            label (str): The string label representing the imputer type.
+
+        Returns:
+            ImputerType: The corresponding `ImputerType` enum.
+
+        Raises:
+            NotImplementedError: If the provided label does not match any known imputer types.
+        """
         if label == 'knn':
             return ImputerType.KNN
         elif label == 'mean':
@@ -27,4 +44,7 @@ class ImputerType(StrEnum):
 
     @staticmethod
     def list_available_imputers() -> None:
-        [print(e.value) for e in ImputerType]
+        """
+        Prints a list of all available imputer types in the `ImputerType` enum.
+        """
+        [print(e) for e in ImputerType]

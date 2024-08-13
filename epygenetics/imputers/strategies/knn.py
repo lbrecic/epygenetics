@@ -6,19 +6,30 @@ from epygenetics.imputers.base_imputer import BaseImputer
 
 
 class KNNImputer(BaseImputer):
+    """
+    An imputer class that uses the K-Nearest Neighbors (KNN) algorithm to impute missing values
+    in a DNA methylation DataFrame. The imputation is performed row-wise, predicting missing values
+    based on the closest non-missing values in the same row.
+    """
+
     def __init__(self, n_neighbors: int = 5) -> None:
+        """
+        Initializes the KNNImputer with a specified number of neighbors.
+
+        Parameters:
+            n_neighbors (int): The number of neighboring columns to use for imputation. Defaults to 5.
+        """
         self.n_neighbors: int = n_neighbors
 
     def impute(self, dna_m: pd.DataFrame) -> pd.DataFrame:
         """
-        This function imputes missing values in a pandas DataFrame using a row-wise K-Nearest Neighbors algorithm.
+        Imputes missing values in a pandas DataFrame using a row-wise K-Nearest Neighbors (KNN) algorithm.
 
         Parameters:
-        dna_m (pd.DataFrame): The input DataFrame with missing values.
-        n_neighbors (int): Number of neighboring columns to use for imputation (default is 5).
+            dna_m (pd.DataFrame): The input DataFrame with missing values.
 
         Returns:
-        pd.DataFrame: A DataFrame with missing values imputed using the KNN algorithm.
+            pd.DataFrame: A DataFrame with missing values imputed using the KNN algorithm.
         """
         # Iterate over each row in the DataFrame
         for row_idx in dna_m.index:

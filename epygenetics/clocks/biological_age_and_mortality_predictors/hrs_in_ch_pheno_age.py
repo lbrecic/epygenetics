@@ -7,6 +7,19 @@ from epygenetics.clocks.type import ClockType
 
 
 class HRSInCHPhenoAgeClock(RegressionClock):
+    """
+    A specific implementation of the `RegressionClock` for the HRS In CH PhenoAge clock.
+    This clock predicts phenotypic age based on DNA methylation data using predefined
+    CpG sites and their associated weights.
+
+    The CpG sites and regression coefficients are loaded from a CSV file during
+    initialization.
+    """
+
     def __init__(self) -> None:
+        """
+        Initializes the HRSInCHPhenoAgeClock object by loading the necessary CpG sites
+        and weights from a CSV file and setting the intercept for the regression model.
+        """
         cpgs: Optional[pd.DataFrame] = pd.read_csv('data/CpGs/HRSInCHPhenoAge_CpGs.csv')
         super().__init__(ClockType.HRS_IN_CH_PHENO_AGE, 'CpG', 'Weight', 52.8334080, cpgs)

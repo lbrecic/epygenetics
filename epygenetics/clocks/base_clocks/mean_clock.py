@@ -10,7 +10,44 @@ from epygenetics.imputers.type import ImputerType
 
 
 class MeanClock(Clock):
-    def check_cpgs(self, dna_m: pd.DataFrame, is_imputation: bool = False, imputer_type=ImputerType.REGULAR, cpg_imputation: Optional[pd.DataFrame] = None) -> Tuple[np.ndarray, bool]:
+    """
+    A concrete implementation of the `Clock` class that calculates the mean methylation
+    values across specific CpG sites to estimate biological age or other phenotypic outcomes.
+
+    This class checks for the presence of required CpG sites in the DNA methylation data,
+    imputes missing values if necessary, and then calculates the mean methylation values.
+    """
+
+    def check_cpgs(self,
+                   dna_m: pd.DataFrame,
+                   is_imputation: bool = False,
+                   imputer_type=ImputerType.REGULAR,
+                   cpg_imputation: Optional[pd.DataFrame] = None
+                   ) -> Tuple[np.ndarray, bool]:
+        """
+        Checks the presence of required CpG sites in the DNA methylation data and
+        optionally imputes missing CpG values.
+
+        Parameters:
+            dna_m (pd.DataFrame): A DataFrame containing DNA methylation data.
+            is_imputation (bool, optional): Whether to perform imputation for missing
+                                            CpG sites. Defaults to False.
+            imputer_type (ImputerType, optional): The type of imputer to use if
+                                                  imputation is performed. Defaults to
+                                                  ImputerType.REGULAR.
+            cpg_imputation (Optional[pd.DataFrame], optional): A DataFrame containing
+                                                               imputation data for CpG sites.
+                                                               Defaults to None.
+
+        Returns:
+            Tuple[np.ndarray, bool]: A tuple containing an array of the CpG sites present
+                                     in both the DNA methylation data and the clock's CpG list,
+                                     and a boolean indicating whether all required CpG sites
+                                     were found.
+
+        Raises:
+            ValueError: If the CpG sites have not been loaded into the clock.
+        """
         if self.cpgs is None:
             raise ValueError("CpGs not loaded.")
 
@@ -31,7 +68,38 @@ class MeanClock(Clock):
 
         return present_cpgs, cpg_check
 
-    def calculate(self, dna_m: pd.DataFrame, present_cpgs: np.ndarray, cpg_check: bool, pheno: Optional[pd.DataFrame], is_imputation: bool) -> Union[pd.DataFrame, pd.Series]:
+    def calculate(self,
+                  dna_m: pd.DataFrame,
+                  present_cpgs: np.ndarray,
+                  cpg_check: bool,
+                  pheno: Optional[pd.DataFrame],
+                  is_imputation: bool
+                  ) -> Union[pd.DataFrame, pd.Series]:
+        """
+        Calculates the mean methylation values across the specified CpG sites.
+
+        If all required CpG sites are present or if imputation has been successfully
+        performed, the mean methylation values are calculated. The results are either
+        added to the provided phenotype DataFrame or returned as a Series.
+
+        Parameters:
+            dna_m (pd.DataFrame): A DataFrame containing DNA methylation data.
+            present_cpgs (np.ndarray): An array of CpG sites that are present in both
+                                       the DNA methylation data and the clock's CpG list.
+            cpg_check (bool): A boolean indicating whether all required CpG sites were found.
+            pheno (Optional[pd.DataFrame]): A DataFrame containing phenotypic data. If provided,
+                                            the calculated values are added to this DataFrame.
+                                            Defaults to None.
+            is_imputation (bool): Whether imputation was performed for missing CpG sites.
+
+        Returns:
+            Union[pd.DataFrame, pd.Series]: The mean methylation values either as a DataFrame
+                                            if `pheno` is provided, with the calculated values
+                                            added to it, or as a Series if no `pheno` is provided.
+
+        Raises:
+            Exception: If the CpG check fails and imputation is not enabled or feasible.
+        """
         if cpg_check or is_imputation:
             map_idx = dna_m.columns.get_indexer(present_cpgs)
             mean_v = dna_m.iloc[:, map_idx].mean(axis=1, skipna=True)

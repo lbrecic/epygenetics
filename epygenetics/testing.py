@@ -4,118 +4,65 @@ import pandas as pd
 import pytest
 import tabulate as tb
 
-import data.test.clock_results
+from epygenetics.test.data.clock_results import *
+from epygenetics.test.data.text_consts import *
 
-delimiter = "=========================================================================================================="
+
+def print_comparison_output(title: str, methylCIPHER_data: pd.DataFrame, epygenetics_data: pd.DataFrame) -> None:
+    print(title)
+    print(methylCIPHER)
+    print(tb.tabulate(methylCIPHER_data, headers='keys', tablefmt='pretty'))
+    print()
+    print(epygenetics)
+    print(tb.tabulate(epygenetics_data, headers='keys', tablefmt='pretty'))
+    print()
 
 
 def methylCIPHER_comparison() -> None:
     print()
 
-    print(delimiter)
-    print("A comparsion of implemented clocks with package written in programming language R called methylCIPHER is shown.")
-    print("Some of the epygenetics clocks had to use imputation and between all implemented imputations here is shown the one that yielded the best results.")
-    print("Lin, Vidal-Bralo, Lee-Control, Lee-Robust, Lee-Refined-Robust, Mayne, PEDBE, Horvath2 all use KNN imputation.")
-    print("Bohlin, Knight and DNAm Cortical use regulat imputation using pre-calculated median values of the golden standard sesame-450k-median.")
-    print(delimiter)
+    print(output_delimiter)
+    print(intro_output)
+    print(output_delimiter)
     print()
 
-    print("Following comparisons are run with a dna methylation data found in 'epygenetics/data/examples/exampleBetas.csv:")
-    print()
+    print("Following comparisons are run with a dna methylation data found in 'epygenetics/data/examples/exampleBetas.csv\n")
+    print(output_delimiter)
+    print_comparison_output("Biological Age and Mortality Predictors", methylCIPHER_type_1, epygenetics_type_1)
 
-    print(delimiter)
-    print("Biological Age and Mortality Predictors")
-    print("methylCIPHER")
-    df = data.test.clock_results.methylCIPHER_type_1
-    print(tb.tabulate(df, headers='keys', tablefmt='pretty'))
-    print()
-    print("epygenetics")
-    df = data.test.clock_results.epygenetics_type_1
-    print(tb.tabulate(df, headers='keys', tablefmt='pretty'))
-    print()
-    print("Following comparisons are run with a dna methylation data found in 'epygenetics/data/examples/exampleBetas_2.csv:")
-    print("Pheno data can be found in 'epygenetics/data/examples/examplePheno_2.csv:")
-    print()
-    print("methylCIPHER - PRC Pheno Age")
-    df = data.test.clock_results.methylCIPHER_prcPhenoAge_data
-    print(tb.tabulate(df, headers='keys', tablefmt='pretty'))
-    print()
-    print("epygenetics - PRC Pheno Age")
-    df = data.test.clock_results.epygenetics_prcPhenoAge_data
-    print(tb.tabulate(df, headers='keys', tablefmt='pretty'))
-    print()
-    print("methylCIPHER - NON PRC Pheno Age")
-    df = data.test.clock_results.methylCIPHER_nonPrcPhenoAge_data
-    print(tb.tabulate(df, headers='keys', tablefmt='pretty'))
-    print()
-    print("epygenetics - NON PRC Pheno Age")
-    df = data.test.clock_results.epygenetics_nonPrcPhenoAge_data
-    print(tb.tabulate(df, headers='keys', tablefmt='pretty'))
-    print()
+    print("Following comparisons are run with a dna methylation data found in 'epygenetics/data/examples/exampleBetas_2.csv")
+    print("Pheno data can be found in 'epygenetics/data/examples/examplePheno_2.csv\n")
+    print_comparison_output("PRC Pheno Age", methylCIPHER_prcPhenoAge_data, epygenetics_prcPhenoAge_data)
+    print_comparison_output("NON PRC Pheno Age", methylCIPHER_nonPrcPhenoAge_data, epygenetics_nonPrcPhenoAge_data)
 
-    print(delimiter)
-    print("Cancer and Mitotic Rates Predictors")
-    print("methylCIPHER")
-    df = data.test.clock_results.methylCIPHER_type_2
-    print(tb.tabulate(df, headers='keys', tablefmt='pretty'))
-    print()
-    print("epygenetics")
-    df = data.test.clock_results.epygenetics_type_2
-    print(tb.tabulate(df, headers='keys', tablefmt='pretty'))
-    print()
+    print(output_delimiter)
+    print_comparison_output("Cancer and Mitotic Rates Predictors", methylCIPHER_type_2, epygenetics_type_2)
 
-    print(delimiter)
-    print("Chronological Age Predictors")
-    print("methylCIPHER")
-    df = data.test.clock_results.methylCIPHER_type_3
-    print(tb.tabulate(df, headers='keys', tablefmt='pretty'))
-    print()
-    print("epygenetics")
-    df = data.test.clock_results.epygenetics_type_3
-    print(tb.tabulate(df, headers='keys', tablefmt='pretty'))
-    print()
+    print(output_delimiter)
+    print_comparison_output("Chronological Age Predictors", methylCIPHER_type_3, epygenetics_type_3)
 
-    print(delimiter)
-    print("Gestational And Pediatric Age Predictors")
-    print("methylCIPHER")
-    df = data.test.clock_results.methylCIPHER_type_4
-    print(tb.tabulate(df, headers='keys', tablefmt='pretty'))
-    print()
-    print("epygenetics")
-    df = data.test.clock_results.epygenetics_type_4
-    print(tb.tabulate(df, headers='keys', tablefmt='pretty'))
-    print()
+    print(output_delimiter)
+    print_comparison_output("Gestational And Pediatric Age Predictors", methylCIPHER_type_4, epygenetics_type_4)
 
-    print(delimiter)
-    print("Non Blood Predictors")
-    print("methylCIPHER")
-    df = data.test.clock_results.methylCIPHER_type_5
-    print(tb.tabulate(df, headers='keys', tablefmt='pretty'))
-    print()
-    print("epygenetics")
-    df = data.test.clock_results.epygenetics_type_5
-    print(tb.tabulate(df, headers='keys', tablefmt='pretty'))
-    print()
+    print(output_delimiter)
+    print_comparison_output("Non Blood Predictors", methylCIPHER_type_5, epygenetics_type_5)
 
-    print(delimiter)
-    print("Trait Predictors")
-    print("methylCIPHER")
-    df = data.test.clock_results.methylCIPHER_type_6
-    print(tb.tabulate(df, headers='keys', tablefmt='pretty'))
-    print()
-    print("epygenetics")
-    df = data.test.clock_results.epygenetics_type_6
-    print(tb.tabulate(df, headers='keys', tablefmt='pretty'))
-    print()
+    print(output_delimiter)
+    print_comparison_output("Trait Predictors", methylCIPHER_type_6, epygenetics_type_6)
+
+
+def init_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description="Run code automated testing.")
+    parser.add_argument('-u', '--unit', action='store_true', help="Run unit tests only")
+    parser.add_argument('-c', '--comparison', action='store_true', help="Run comparison with methylCIPHER package only")
+
+    return parser
 
 
 def testing() -> None:
     pd.set_option('display.max_rows', None)
 
-    parser = argparse.ArgumentParser(description="Run code automated testing.")
-    parser.add_argument('--unit', action='store_true', help="Run mypy")
-    parser.add_argument('--comparison', action='store_true', help="Run flake8")
-
+    parser = init_parser()
     args = parser.parse_args()
 
     if not any(vars(args).values()):
