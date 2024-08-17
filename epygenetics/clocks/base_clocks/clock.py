@@ -50,7 +50,8 @@ class Clock(ABC):
         self.cpgs = pd.read_csv(path)
 
     @abstractmethod
-    def validate(self, dna_m: pd.DataFrame,
+    def validate(self,
+                 dna_m: pd.DataFrame,
                  is_imputation: bool = False,
                  imputer_type=ImputerType.REGULAR,
                  cpg_imputation: Optional[pd.DataFrame] = None
@@ -76,7 +77,8 @@ class Clock(ABC):
         pass
 
     @abstractmethod
-    def calculate(self, dna_m: pd.DataFrame,
+    def calculate(self,
+                  dna_m: pd.DataFrame,
                   common_cpgs: np.ndarray,
                   cpg_check: Any,
                   pheno: Optional[pd.DataFrame],
