@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any, Optional, Tuple, Union
+from typing import Optional, Tuple, Union
 
 import numpy as np
 import pandas as pd
@@ -80,7 +80,7 @@ class Clock(ABC):
     def calculate(self,
                   dna_m: pd.DataFrame,
                   common_cpgs: np.ndarray,
-                  cpg_check: Any,
+                  cpg_check: bool,
                   pheno: Optional[pd.DataFrame],
                   is_imputation: bool
                   ) -> Union[pd.DataFrame, pd.Series]:
