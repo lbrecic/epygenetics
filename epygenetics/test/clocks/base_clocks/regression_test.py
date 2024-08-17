@@ -36,7 +36,7 @@ class RegressionClockTestCase(unittest.TestCase):
             'cpg2': [0.3, 0.4],
             'cpg3': [0.5, 0.6]
         })
-        common_cpgs, cpg_check = self.clock.check_cpgs(dna_m)
+        common_cpgs, cpg_check = self.clock.validate(dna_m)
         self.assertTrue(cpg_check)
         np.testing.assert_array_equal(common_cpgs, np.array(['cpg1', 'cpg2', 'cpg3']))
 
@@ -51,7 +51,7 @@ class RegressionClockTestCase(unittest.TestCase):
         mock_imputer = MagicMock(spec=BaseImputer)
         mock_create_imputer.return_value = mock_imputer
 
-        common_cpgs, cpg_check = self.clock.check_cpgs(dna_m, is_imputation=True)
+        common_cpgs, cpg_check = self.clock.validate(dna_m, is_imputation=True)
         self.assertFalse(cpg_check)
         self.assertTrue('cpg3' in dna_m.columns)
         mock_imputer.impute.assert_called_once_with(dna_m)

@@ -33,7 +33,7 @@ class MeanClockTestCase(unittest.TestCase):
             'cpg2': [0.3, 0.4],
             'cpg3': [0.5, 0.6]
         })
-        present_cpgs, cpg_check = self.clock.check_cpgs(dna_m)
+        present_cpgs, cpg_check = self.clock.validate(dna_m)
         self.assertTrue(cpg_check)
         np.testing.assert_array_equal(present_cpgs, np.array(['cpg1', 'cpg2', 'cpg3']))
 
@@ -53,8 +53,8 @@ class MeanClockTestCase(unittest.TestCase):
         mock_imputer = MagicMock(spec=BaseImputer)
         mock_create_imputer.return_value = mock_imputer
 
-        present_cpgs, cpg_check = self.clock.check_cpgs(dna_m, is_imputation=True, imputer_type=ImputerType.REGULAR,
-                                                        cpg_imputation=cpg_imputation)
+        present_cpgs, cpg_check = self.clock.validate(dna_m, is_imputation=True, imputer_type=ImputerType.REGULAR,
+                                                      cpg_imputation=cpg_imputation)
 
         # Assert that imputation was triggered and applied correctly
         self.assertFalse(cpg_check)
@@ -70,7 +70,7 @@ class MeanClockTestCase(unittest.TestCase):
         })
 
         with self.assertRaises(ValueError) as context:
-            self.clock.check_cpgs(dna_m, is_imputation=True, imputer_type=ImputerType.REGULAR, cpg_imputation=None)
+            self.clock.validate(dna_m, is_imputation=True, imputer_type=ImputerType.REGULAR, cpg_imputation=None)
 
         self.assertIn("Necessary CpG is missing and no imputation data provided!", str(context.exception))
 

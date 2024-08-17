@@ -18,12 +18,12 @@ class MeanClock(Clock):
     imputes missing values if necessary, and then calculates the mean methylation values.
     """
 
-    def check_cpgs(self,
-                   dna_m: pd.DataFrame,
-                   is_imputation: bool = False,
-                   imputer_type=ImputerType.REGULAR,
-                   cpg_imputation: Optional[pd.DataFrame] = None
-                   ) -> Tuple[np.ndarray, bool]:
+    def validate(self,
+                 dna_m: pd.DataFrame,
+                 is_imputation: bool = False,
+                 imputer_type=ImputerType.REGULAR,
+                 cpg_imputation: Optional[pd.DataFrame] = None
+                 ) -> Tuple[np.ndarray, bool]:
         """
         Checks the presence of required CpG sites in the DNA methylation data and
         optionally imputes missing CpG values.

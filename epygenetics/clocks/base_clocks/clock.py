@@ -50,11 +50,11 @@ class Clock(ABC):
         self.cpgs = pd.read_csv(path)
 
     @abstractmethod
-    def check_cpgs(self, dna_m: pd.DataFrame,
-                   is_imputation: bool = False,
-                   imputer_type=ImputerType.REGULAR,
-                   cpg_imputation: Optional[pd.DataFrame] = None
-                   ) -> Tuple[np.ndarray, bool]:
+    def validate(self, dna_m: pd.DataFrame,
+                 is_imputation: bool = False,
+                 imputer_type=ImputerType.REGULAR,
+                 cpg_imputation: Optional[pd.DataFrame] = None
+                 ) -> Tuple[np.ndarray, bool]:
         """
         Checks the consistency and availability of CpG sites between the input DNA methylation
         data and the required CpG sites for the clock. This is an abstract method that must be
@@ -110,7 +110,7 @@ class Clock(ABC):
                 cpg_imputation: Optional[pd.DataFrame] = None
                 ) -> None:
         """
-        Executes the full process of checking CpG sites and calculating the predicted
+        Executes the full process of validating CpG sites and calculating the predicted
         biological age or other outcomes. This method uses the check_cpgs and calculate
         methods defined in the subclasses.
 
@@ -125,6 +125,6 @@ class Clock(ABC):
             cpg_imputation (Optional[pd.DataFrame], optional): A DataFrame containing imputation data
                                                                for CpG sites. Defaults to None.
         """
-        cpgs, cpg_check = self.check_cpgs(dna_m, is_imputation, imputation_type, cpg_imputation)
+        cpgs, cpg_check = self.validate(dna_m, is_imputation, imputation_type, cpg_imputation)
         result = self.calculate(dna_m, cpgs, cpg_check, pheno, is_imputation)
         print(result)
