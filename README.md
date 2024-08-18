@@ -84,7 +84,7 @@ The following epigenetic clocks have been implemented in the `epygenetics` libra
 - PhenoAge (PhenoAge)
 - EpiTOC (EpiTOC)
 - HypoClock (hypoClock)
-- MiAge (MiAge)
+- MiAge (MiAge) (Not fully implemented)
 - Bocklandt (Bocklandt)
 - Garagnani (Garagnani)
 - Hannum (Hannum)
