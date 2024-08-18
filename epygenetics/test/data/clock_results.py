@@ -4,14 +4,14 @@ import pandas as pd
 from epygenetics.clocks.type import ClockType
 
 methylCIPHER_type_1 = pd.DataFrame({
-    ClockType.HRS_IN_CH_PHENO_AGE: [55.52177, 5512549, 55.58441, 55.67962, 55.72232],
+    ClockType.HRS_IN_CH_PHENO_AGE: [55.52177, 55.12549, 55.58441, 55.67962, 55.72232],
     ClockType.PHENO_AGE: [52.29315, 41.05867, 43.54460, 43.96697, 40.35242]
 })
 
 methylCIPHER_type_2 = pd.DataFrame({
     ClockType.EPITOC: [0.12408041, 0.11472045, 0.08814333, 0.09467855, 0.09366637],
     ClockType.HYPO_CLOCK: [0.8443867, 0.8587854, 0.8659912, 0.8669189, 0.8714039],
-    ClockType.MIAGE: [276.9358, 649.4476, 255.3803, 275.4913, 296.3778]
+    # ClockType.MIAGE: [276.9358, 649.4476, 255.3803, 275.4913, 296.3778]
 })
 
 methylCIPHER_type_3 = pd.DataFrame({
@@ -54,7 +54,7 @@ epygenetics_type_1 = pd.DataFrame({
 epygenetics_type_2 = pd.DataFrame({
     ClockType.EPITOC: [0.124080, 0.114720, 0.088143, 0.094679, 0.093666],
     ClockType.HYPO_CLOCK: [0.844387, 0.858785, 0.865991, 0.866919, 0.871404],
-    ClockType.MIAGE: [np.nan, np.nan, np.nan, np.nan, np.nan],  # Not working
+    # ClockType.MIAGE: [np.nan, np.nan, np.nan, np.nan, np.nan],  # Not working
 })
 
 epygenetics_type_3 = pd.DataFrame({

@@ -86,7 +86,9 @@ class ClockFactory:
         elif clock_type == ClockType.HYPO_CLOCK:
             return HypoClock()
         elif clock_type == ClockType.MIAGE:
-            return MiAgeClock()
+            # return MiAgeClock()
+            # since MiAgeClock is not yielding feasible results, we throw a not implemented error
+            raise NotImplementedError("MiAgeClock is not yielding feasible results so it is not usable currently")
         elif clock_type == ClockType.BOCKLANDT:
             return BocklandtClock()
         elif clock_type == ClockType.GARAGNANI:
