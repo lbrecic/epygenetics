@@ -23,7 +23,7 @@ class BMIMcCartneyClockTestCase(unittest.TestCase):
         clock = BMIMcCartneyClock()
 
         # Assert that the CSV file was read correctly
-        mock_read_csv.assert_called_once_with('data/CpGs/BMI_CpGs.csv')
+        mock_read_csv.assert_called_once_with('data/CpGs/BMI_McCartney.csv')
 
         # Assert that the attributes are set correctly
         self.assertEqual(clock.name, ClockType.BMI_MCCARTNEY)

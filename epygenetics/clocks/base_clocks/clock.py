@@ -40,15 +40,6 @@ class Clock(ABC):
         self.marker_name: str = marker_name
         self.cpgs: Optional[pd.DataFrame] = cpgs
 
-    def load_cpgs_from_csv(self, path: str) -> None:
-        """
-        Loads CpG data from a CSV file and stores it in the cpgs attribute.
-
-        Parameters:
-            path (str): The file path to the CSV containing CpG site data.
-        """
-        self.cpgs = pd.read_csv(path)
-
     @abstractmethod
     def validate(self,
                  dna_m: pd.DataFrame,

@@ -4,6 +4,8 @@ import pandas as pd
 
 from epygenetics.clocks.base_clocks.linear_clock import LinearClock
 from epygenetics.clocks.type import ClockType
+from epygenetics.store import AbstractDataStore
+from epygenetics.store.strategies import CSVDataStore
 
 
 class BocklandtClock(LinearClock):
@@ -19,5 +21,6 @@ class BocklandtClock(LinearClock):
         Initializes the BocklandtClock object by loading the necessary CpG sites
         from a CSV file.
         """
-        cpgs: Optional[pd.DataFrame] = pd.read_csv('data/CpGs/Bocklandt_CpG.csv')
+        store: AbstractDataStore = CSVDataStore('data/CpGs')
+        cpgs: Optional[pd.DataFrame] = store.retrieve_methylation_data(ClockType.BOCKLANDT)
         super().__init__(ClockType.BOCKLANDT, 'Bocklandt_CpG', cpgs)

@@ -26,7 +26,7 @@ class HorvathSkinAndBloodClockTestCase(unittest.TestCase):
         clock = HorvathSkinAndBloodClock()
 
         # Assert that the CSV file was read correctly
-        mock_read_csv.assert_called_once_with('data/CpGs/Horvath2_CpGs.csv')
+        mock_read_csv.assert_called_once_with('data/CpGs/Horvath2.csv')
 
         # Assert that the attributes are set correctly
         self.assertEqual(clock.name, ClockType.HORVATH_SKIN_AND_BLOOD)

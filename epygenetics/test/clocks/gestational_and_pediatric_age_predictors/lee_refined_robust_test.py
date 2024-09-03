@@ -24,7 +24,7 @@ class LeeRefinedRobustClockTestCase(unittest.TestCase):
         clock = LeeRefinedRobustClock()
 
         # Assert that the CSV file was read correctly
-        mock_read_csv.assert_called_once_with('data/CpGs/LeeRefinedRobust_CpGs.csv')
+        mock_read_csv.assert_called_once_with('data/CpGs/LeeRefinedRobust.csv')
 
         # Assert that the attributes are set correctly
         self.assertEqual(clock.name, ClockType.LEE_REFINED_ROBUST)

@@ -5,6 +5,8 @@ import pandas as pd
 
 from epygenetics.clocks.base_clocks.regression_clock import RegressionClock
 from epygenetics.clocks.type import ClockType
+from epygenetics.store import AbstractDataStore
+from epygenetics.store.strategies import CSVDataStore
 from epygenetics.utils.mi_age_mitotic_age import miage_mitotic_age
 
 
@@ -29,7 +31,8 @@ class MiAgeClock(RegressionClock):
             miage_params (Any): Additional parameters required for the
                                 MiAge calculation.
         """
-        cpgs: Optional[pd.DataFrame] = pd.read_csv('data/CpGs/MiAge_CpGs.csv')
+        store: AbstractDataStore = CSVDataStore('data/CpGs')
+        cpgs: Optional[pd.DataFrame] = store.retrieve_methylation_data(ClockType.MIAGE)
         super().__init__(ClockType.MIAGE, 'CpGs', 'Age-hyper/Age-hypo', 0, cpgs)
         self.miage_params: Tuple[Any, ...] = miage_params
 

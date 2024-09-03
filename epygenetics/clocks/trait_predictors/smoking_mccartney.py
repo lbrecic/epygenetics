@@ -4,6 +4,8 @@ import pandas as pd
 
 from epygenetics.clocks.base_clocks.regression_clock import RegressionClock
 from epygenetics.clocks.type import ClockType
+from epygenetics.store import AbstractDataStore
+from epygenetics.store.strategies import CSVDataStore
 
 
 class SmokingMcCartneyClock(RegressionClock):
@@ -22,5 +24,6 @@ class SmokingMcCartneyClock(RegressionClock):
         and regression coefficients from a CSV file and setting the intercept
         for the regression model.
         """
-        cpgs: Optional[pd.DataFrame] = pd.read_csv('data/CpGs/Smoking_CpGs.csv')
+        store: AbstractDataStore = CSVDataStore('data/CpGs')
+        cpgs: Optional[pd.DataFrame] = store.retrieve_methylation_data(ClockType.SMOKING_MCCARTNEY)
         super().__init__(ClockType.SMOKING_MCCARTNEY, 'CpG', 'Beta', 0, cpgs)

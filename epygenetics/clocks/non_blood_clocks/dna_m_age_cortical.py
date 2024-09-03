@@ -5,6 +5,8 @@ import pandas as pd
 
 from epygenetics.clocks.base_clocks.regression_clock import RegressionClock
 from epygenetics.clocks.type import ClockType
+from epygenetics.store import AbstractDataStore
+from epygenetics.store.strategies import CSVDataStore
 from epygenetics.utils.anti_trafo import anti_trafo
 
 
@@ -24,7 +26,8 @@ class DNAmAgeCorticalClock(RegressionClock):
         and regression coefficients from a CSV file and setting the intercept
         for the regression model.
         """
-        cpgs: Optional[pd.DataFrame] = pd.read_csv('data/CpGs/DNAmClockCortical_CpGs.csv')
+        store: AbstractDataStore = CSVDataStore('data/CpGs')
+        cpgs: Optional[pd.DataFrame] = store.retrieve_methylation_data(ClockType.DNAM_AGE_CORTICAL)
         super().__init__(ClockType.DNAM_AGE_CORTICAL, 'CpGs', 'coef', 0.577682570446177, cpgs)
 
     def calculate(self,

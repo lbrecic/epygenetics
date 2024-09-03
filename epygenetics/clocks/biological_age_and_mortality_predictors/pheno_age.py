@@ -4,6 +4,8 @@ import pandas as pd
 
 from epygenetics.clocks.base_clocks.regression_clock import RegressionClock
 from epygenetics.clocks.type import ClockType
+from epygenetics.store import AbstractDataStore
+from epygenetics.store.strategies import CSVDataStore
 
 
 class PhenoAgeClock(RegressionClock):
@@ -21,5 +23,6 @@ class PhenoAgeClock(RegressionClock):
         Initializes the PhenoAgeClock object by loading the necessary CpG sites
         and weights from a CSV file and setting the intercept for the regression model.
         """
-        cpgs: Optional[pd.DataFrame] = pd.read_csv('data/CpGs/PhenoAge_CpGs.csv')
+        store: AbstractDataStore = CSVDataStore('data/CpGs')
+        cpgs: Optional[pd.DataFrame] = store.retrieve_methylation_data(ClockType.PHENO_AGE)
         super().__init__(ClockType.PHENO_AGE, 'CpG', 'Weight', 60.664, cpgs)

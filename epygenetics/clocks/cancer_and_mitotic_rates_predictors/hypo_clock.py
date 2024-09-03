@@ -4,6 +4,8 @@ import pandas as pd
 
 from epygenetics.clocks.base_clocks.mean_clock import MeanClock
 from epygenetics.clocks.type import ClockType
+from epygenetics.store import AbstractDataStore
+from epygenetics.store.strategies import CSVDataStore
 
 
 class HypoClock(MeanClock):
@@ -20,5 +22,6 @@ class HypoClock(MeanClock):
         Initializes the HypoClock object by loading the necessary CpG sites
         from a CSV file.
         """
-        cpgs: Optional[pd.DataFrame] = pd.read_csv('data/CpGs/hypoClock_CpGs.csv')
+        store: AbstractDataStore = CSVDataStore('data/CpGs')
+        cpgs: Optional[pd.DataFrame] = store.retrieve_methylation_data(ClockType.HYPO_CLOCK)
         super().__init__(ClockType.HYPO_CLOCK, 'hypoClock_CpGs', cpgs)

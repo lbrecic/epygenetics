@@ -27,7 +27,7 @@ class MiAgeClockTestCase(unittest.TestCase):
         clock = MiAgeClock('param1', 'param2')
 
         # Assert that the CSV file was read correctly
-        mock_read_csv.assert_called_once_with('data/CpGs/MiAge_CpGs.csv')
+        mock_read_csv.assert_called_once_with('data/CpGs/MiAge.csv')
 
         # Assert that the attributes are set correctly
         self.assertEqual(clock.name, ClockType.MIAGE)

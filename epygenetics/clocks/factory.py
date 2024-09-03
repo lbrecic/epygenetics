@@ -11,8 +11,6 @@ from epygenetics.clocks.cancer_and_mitotic_rates_predictors.epitoc import \
     EpiTOCClock
 from epygenetics.clocks.cancer_and_mitotic_rates_predictors.hypo_clock import \
     HypoClock
-from epygenetics.clocks.cancer_and_mitotic_rates_predictors.miage import \
-    MiAgeClock
 from epygenetics.clocks.chronological_age_predictors.bocklandt import \
     BocklandtClock
 from epygenetics.clocks.chronological_age_predictors.garagnani import \

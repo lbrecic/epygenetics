@@ -5,6 +5,8 @@ import pandas as pd
 
 from epygenetics.clocks.base_clocks.regression_clock import RegressionClock
 from epygenetics.clocks.type import ClockType
+from epygenetics.store import AbstractDataStore
+from epygenetics.store.strategies import CSVDataStore
 from epygenetics.utils.anti_trafo import anti_trafo
 
 
@@ -25,7 +27,8 @@ class HorvathMultitissueClock(RegressionClock):
         and regression coefficients from a CSV file and setting the intercept
         for the regression model.
         """
-        cpgs: pd.DataFrame = pd.read_csv('data/CpGs/Horvath1_CpGs.csv')
+        store: AbstractDataStore = CSVDataStore('data/CpGs')
+        cpgs: pd.DataFrame = store.retrieve_methylation_data(ClockType.HORVATH_MULTITISSUE)
         super().__init__(ClockType.HORVATH_MULTITISSUE, 'CpGmarker', 'CoefficientTraining', 0.696, cpgs)
 
     def calculate(self,

@@ -1,15 +1,14 @@
-from typing import Optional, Union, Tuple
+from typing import Optional, Tuple, Union
+
 import numpy as np
 import pandas as pd
 
-import epygenetics.test.data.clock_results
 from epygenetics.clocks.base_clocks.clock import Clock
 from epygenetics.imputers import ImputerType
 from epygenetics.imputers.base_imputer import BaseImputer
 from epygenetics.imputers.factory import ImputerFactory
-from epygenetics.utils.trafo import trafo
 from epygenetics.utils.anti_trafo import anti_trafo
-from epygenetics.clocks.trait_predictors.alcohol_mccartney import AlcoholMcCartneyClock
+from epygenetics.utils.trafo import trafo
 
 
 class CustomClock(Clock):
@@ -70,13 +69,9 @@ class CustomClock(Clock):
 
 
 def main():
-    # clock = CustomClock()
-    # dna_m = pd.read_csv('../data/examples/exampleBetas.csv')
-    # clock.execute(dna_m)
-
-
-    print(epygenetics.test.data.clock_results.epygenetics_type_1.to_latex())
-    print(epygenetics.test.data.clock_results.methylCIPHER_type_1.to_latex())
+    clock = CustomClock()
+    dna_m = pd.read_csv('../data/examples/exampleBetas.csv')
+    clock.execute(dna_m)
 
 
 if __name__ == '__main__':

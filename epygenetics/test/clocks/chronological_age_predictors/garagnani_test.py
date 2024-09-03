@@ -23,7 +23,7 @@ class GaragnaniClockTestCase(unittest.TestCase):
         clock = GaragnaniClock()
 
         # Assert that the CSV file was read correctly
-        mock_read_csv.assert_called_once_with('data/CpGs/Garagnani_CpG.csv')
+        mock_read_csv.assert_called_once_with('data/CpGs/Garagnani.csv')
 
         # Assert that the attributes are set correctly
         self.assertEqual(clock.name, ClockType.GARAGNANI)

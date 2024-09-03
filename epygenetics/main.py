@@ -9,6 +9,8 @@ import pandas as pd
 from epygenetics.clocks.factory import ClockFactory
 from epygenetics.clocks.type import ClockType
 from epygenetics.imputers.type import ImputerType
+from epygenetics.loader.factory import LoaderFactory
+from epygenetics.loader.loader import AbstractLoader
 
 
 def setup() -> None:
@@ -24,6 +26,7 @@ def init_parser() -> argparse.ArgumentParser:
     parser.add_argument('-i', '--imputation', default=False, action='store_true', help="Impute missing CpG values")
     parser.add_argument('-f', '--imputation-file', type=str, required=False, help="Path to CpG imputation file")
     parser.add_argument('-m', '--imputation-method', type=str, required=False, default='regular', help="Imputation method to use")
+    parser.add_argument('-l', '--loader', type=str, required=False, default='csv', help="Loader type (default: csv, other: rda)")
     parser.add_argument('-v', '--verbose', action='store_true', help="Show traceback if an error occurs")
 
     return parser
@@ -41,7 +44,8 @@ def main() -> None:
             sys.tracebacklimit = 0
 
         # Load DNA methylation betas
-        dna_m: pd.DataFrame = pd.read_csv(args.dnam)
+        loader: AbstractLoader = LoaderFactory.create_loader(args.loader)
+        dna_m: pd.DataFrame = loader.load_data(args.dnam)
 
         # Load pheno data if provided
         pheno: Optional[pd.DataFrame] = pd.read_csv(args.pheno) if args.pheno else None

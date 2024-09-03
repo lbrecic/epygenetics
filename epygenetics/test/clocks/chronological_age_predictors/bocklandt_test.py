@@ -23,7 +23,7 @@ class BocklandtClockTestCase(unittest.TestCase):
         clock = BocklandtClock()
 
         # Assert that the CSV file was read correctly
-        mock_read_csv.assert_called_once_with('data/CpGs/Bocklandt_CpG.csv')
+        mock_read_csv.assert_called_once_with('data/CpGs/Bocklandt.csv')
 
         # Assert that the attributes are set correctly
         self.assertEqual(clock.name, ClockType.BOCKLANDT)

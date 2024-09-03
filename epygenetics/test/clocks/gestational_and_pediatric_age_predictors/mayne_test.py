@@ -24,7 +24,7 @@ class MayneClockTestCase(unittest.TestCase):
         clock = MayneClock()
 
         # Assert that the CSV file was read correctly
-        mock_read_csv.assert_called_once_with('data/CpGs/Mayne_CpGs.csv')
+        mock_read_csv.assert_called_once_with('data/CpGs/Mayne.csv')
 
         # Assert that the attributes are set correctly
         self.assertEqual(clock.name, ClockType.MAYNE)

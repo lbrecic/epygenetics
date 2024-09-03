@@ -23,7 +23,7 @@ class ZhangClockTestCase(unittest.TestCase):
         clock = ZhangClock()
 
         # Assert that the CSV file was read correctly
-        mock_read_csv.assert_called_once_with('data/CpGs/Zhang_10_CpG.csv')
+        mock_read_csv.assert_called_once_with('data/CpGs/Zhang.csv')
 
         # Assert that the attributes are set correctly
         self.assertEqual(clock.name, ClockType.ZHANG)
