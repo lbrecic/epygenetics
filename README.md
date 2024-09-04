@@ -53,6 +53,7 @@ python -m epygenetics.execution -c Horvath1 -d path/to/dnam_file.csv -p path/to/
 - `-i, --imputation`: Impute missing CpG values (optional).
 - `-f, --imputation-file`: Path to CpG imputation file (optional).
 - `-m, --imputation-method`: Imputation method to use (optional, default: \`regular\`).
+- `-l, --loader`: Loader type (default: \`csv\`)
 - `-v, --verbose`: Show traceback if an error occurs (optional).
 
 ### Testing
